@@ -4,13 +4,10 @@ import Link from 'next/link';
 import { useSearchParams, redirect } from 'next/navigation';
 import { useApp } from '@/lib/context/AppContext';
 import { getHomeFeedForUser, getUnRsvpdOrgEventsForUser } from '@/lib/data/helpers';
-import { FriendActivityCard } from '@/components/feed/FriendActivityCard';
-import { OrgEventCard } from '@/components/feed/OrgEventCard';
-import { OpenEventCard } from '@/components/feed/OpenEventCard';
+import { EventFeedCard } from '@/components/feed/EventFeedCard';
 import { DontMissHero } from '@/components/feed/DontMissHero';
 import { SparklesIcon } from '@heroicons/react/24/solid';
 import { BellIcon } from '@heroicons/react/24/outline';
-import type { FeedItemFriendActivity, FeedItemOrgEvent, FeedItemOpenEvent } from '@/lib/types';
 
 export default function HomePage() {
   const { currentUser, rsvps, unreadCount } = useApp();
@@ -59,52 +56,29 @@ export default function HomePage() {
       {!hasAnyItems ? (
         <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <SparklesIcon className="w-10 h-10 text-neon-purple/40 mb-3" />
-          <p className="text-gray-400 font-medium">it&apos;s quiet... too quiet</p>
+          <p className="text-gray-400 font-medium">it&apos;s quiet... too quiet 👀</p>
           <p className="text-xs text-gray-600 mt-1">
             join some orgs and add friends to get in the loop
           </p>
         </div>
       ) : (
-        <div className="space-y-2">
+        <div className="space-y-4">
           {/* Don't Miss Hero — swipeable featured cards */}
           {unRsvpdOrgEvents.length > 0 && (
             <DontMissHero events={unRsvpdOrgEvents} buildHref={buildHref} />
           )}
 
-          {/* Unified Feed */}
+          {/* Event Feed */}
           {hasAnyFeedItems && (
-            <section className="px-4">
-              <div className="space-y-3">
-                {feedItems.map((item) => {
-                  switch (item.type) {
-                    case 'friend_activity':
-                      return (
-                        <FriendActivityCard
-                          key={`fa-${item.event.id}`}
-                          item={item as FeedItemFriendActivity}
-                          buildHref={buildHref}
-                        />
-                      );
-                    case 'org_event':
-                      return (
-                        <OrgEventCard
-                          key={`oe-${item.event.id}`}
-                          item={item as FeedItemOrgEvent}
-                          buildHref={buildHref}
-                        />
-                      );
-                    case 'open_event':
-                      return (
-                        <OpenEventCard
-                          key={`open-${item.event.id}`}
-                          item={item as FeedItemOpenEvent}
-                          buildHref={buildHref}
-                        />
-                      );
-                  }
-                })}
-              </div>
-            </section>
+            <div className="px-4 space-y-3">
+              {feedItems.map((item) => (
+                <EventFeedCard
+                  key={`feed-${item.event.id}`}
+                  item={item}
+                  buildHref={buildHref}
+                />
+              ))}
+            </div>
           )}
         </div>
       )}
