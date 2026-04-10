@@ -49,6 +49,9 @@ export function DontMissHero({ events, buildHref }: DontMissHeroProps) {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="mb-2"
       >
+        <h2 className="px-4 mb-3 text-base font-bold text-white">
+          don&apos;t miss
+        </h2>
         <div
           ref={scrollRef}
           onScroll={handleScroll}

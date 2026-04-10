@@ -71,6 +71,9 @@ export default function HomePage() {
           {/* Event Feed */}
           {hasAnyFeedItems && (
             <div className="px-4 space-y-3">
+              <h2 className="text-base font-bold text-white">
+                what&apos;s on at MSU 🎓
+              </h2>
               {feedItems.map((item) => (
                 <EventFeedCard
                   key={`feed-${item.event.id}`}
