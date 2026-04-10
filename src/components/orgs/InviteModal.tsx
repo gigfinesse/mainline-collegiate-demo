@@ -99,10 +99,10 @@ export function InviteModal({ orgId, orgName, userRole, isOpen, onClose }: Invit
                 </div>
               )}
 
-              {/* Invite as Friend */}
+              {/* Invite as FoH */}
               <div className="mb-6">
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-neon-pink mb-2">
-                  Invite as Friend
+                  Invite as FoH
                 </h3>
                 <div className="flex items-center gap-2 rounded-xl bg-dark-900 border border-dark-600 px-3 py-2.5">
                   <p className="flex-1 text-xs text-gray-400 truncate font-mono">

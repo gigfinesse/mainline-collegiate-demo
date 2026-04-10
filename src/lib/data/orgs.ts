@@ -14,7 +14,7 @@ export const orgs: Org[] = [
     description:
       'The biggest party frat at MSU. We throw the events everyone talks about Monday morning.',
     logoUrl: logo('KappaSigmaPi'),
-    coverUrl: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80',
+    coverUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80',
   },
   {
     id: 'org-td',
@@ -25,7 +25,7 @@ export const orgs: Org[] = [
     description:
       'Social, philanthropic, and always best-dressed. Sisterhood with substance.',
     logoUrl: logo('ThetaDelta'),
-    coverUrl: 'https://images.unsplash.com/photo-1529543544282-ea69407b8ea1?w=800&q=80',
+    coverUrl: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80',
   },
   {
     id: 'org-tc',
@@ -47,7 +47,7 @@ export const orgs: Org[] = [
     description:
       'The game-day crew. Tailgates, watch parties, and school spirit turned up to 11.',
     logoUrl: logo('Rally'),
-    coverUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80',
+    coverUrl: 'https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=800&q=80',
   },
   {
     id: 'org-pl',
@@ -58,6 +58,6 @@ export const orgs: Org[] = [
     description:
       'Small, exclusive, elite. Our events are invite-only for a reason.',
     logoUrl: logo('PhiLambda'),
-    coverUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
+    coverUrl: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800&q=80',
   },
 ];

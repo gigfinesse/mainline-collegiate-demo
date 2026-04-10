@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '@/lib/context/AppContext';
+import { useUserProfile } from '@/lib/context/UserProfileContext';
 import { getCommentsForEvent } from '@/lib/data/helpers';
 import type { Event } from '@/lib/types';
 
@@ -28,6 +29,7 @@ function timeAgo(dateStr: string): string {
 
 export function CommentWall({ event }: CommentWallProps) {
   const { currentUser, comments, addComment, addReaction } = useApp();
+  const { openProfile } = useUserProfile();
   const [text, setText] = useState('');
 
   const eventComments = getCommentsForEvent(event.id, comments);
@@ -64,17 +66,27 @@ export function CommentWall({ event }: CommentWallProps) {
               key={comment.id}
               className="flex gap-3"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={user.avatarUrl}
-                alt={user.firstName}
-                className="h-8 w-8 rounded-full bg-dark-700 flex-shrink-0 mt-0.5"
-              />
+              <button
+                type="button"
+                onClick={() => openProfile(user.id)}
+                className="flex-shrink-0 mt-0.5"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={user.avatarUrl}
+                  alt={user.firstName}
+                  className="h-8 w-8 rounded-full bg-dark-700"
+                />
+              </button>
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-sm font-semibold text-white">
+                  <button
+                    type="button"
+                    onClick={() => openProfile(user.id)}
+                    className="text-sm font-semibold text-white hover:text-neon-purple transition-colors"
+                  >
                     {user.firstName}
-                  </span>
+                  </button>
                   <span className="text-[10px] text-gray-500">
                     {timeAgo(comment.createdAt)}
                   </span>

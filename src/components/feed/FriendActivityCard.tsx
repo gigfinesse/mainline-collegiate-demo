@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { FeedCard } from './FeedCard';
 import { getOrgById, formatTime } from '@/lib/data/helpers';
+import { useUserProfile } from '@/lib/context/UserProfileContext';
 import type { FeedItemFriendActivity } from '@/lib/types';
 
 interface FriendActivityCardProps {
@@ -13,6 +14,7 @@ interface FriendActivityCardProps {
 export function FriendActivityCard({ item, buildHref }: FriendActivityCardProps) {
   const { event, friends } = item;
   const org = getOrgById(event.orgId);
+  const { openProfile } = useUserProfile();
 
   // Build friend text
   const displayedFriends = friends.slice(0, 2);
@@ -41,7 +43,15 @@ export function FriendActivityCard({ item, buildHref }: FriendActivityCardProps)
 
         <div className="flex items-start gap-3">
           {/* Stacked avatars */}
-          <div className="relative flex-shrink-0" style={{ width: 40, height: 40 }}>
+          <div
+            className="relative flex-shrink-0"
+            style={{ width: 40, height: 40 }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (friends.length > 0) openProfile(friends[0].id);
+            }}
+          >
             {friends.slice(0, 3).map((friend, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -80,11 +90,26 @@ export function FriendActivityCard({ item, buildHref }: FriendActivityCardProps)
             </div>
           </div>
 
-          {/* Mini gradient pill */}
+          {/* Mini gradient pill / thumbnail */}
           <div
-            className="flex-shrink-0 w-10 h-10 rounded-xl"
+            className="flex-shrink-0 w-10 h-10 rounded-xl relative overflow-hidden"
             style={{ background: event.posterTheme.background }}
-          />
+          >
+            {event.coverImageUrl && (
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={event.coverImageUrl}
+                  alt={event.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0 opacity-40"
+                  style={{ background: event.posterTheme.background }}
+                />
+              </>
+            )}
+          </div>
         </div>
       </Link>
     </FeedCard>

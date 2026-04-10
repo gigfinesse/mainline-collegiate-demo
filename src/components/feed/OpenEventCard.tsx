@@ -26,9 +26,24 @@ export function OpenEventCard({ item, buildHref }: OpenEventCardProps) {
       <Link href={buildHref(`/events/${event.id}`)} className="block">
         {/* Large gradient background with overlay content */}
         <div
-          className="relative h-44 rounded-t-2xl flex flex-col justify-end p-4"
+          className="relative h-44 rounded-t-2xl flex flex-col justify-end p-4 overflow-hidden"
           style={{ background: event.posterTheme.background }}
         >
+          {/* Cover image when available */}
+          {event.coverImageUrl && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={event.coverImageUrl}
+                alt={event.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-50"
+                style={{ background: event.posterTheme.background }}
+              />
+            </>
+          )}
           {/* Subtle dark overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-t-2xl" />
 

@@ -55,6 +55,23 @@ export function EventHero({ event, org }: EventHeroProps) {
         className="relative h-72 w-full"
         style={{ background: event.posterTheme.background }}
       >
+        {/* Cover image when available */}
+        {event.coverImageUrl && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={event.coverImageUrl}
+              alt={event.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Gradient overlay for text readability */}
+            <div
+              className="absolute inset-0 opacity-60"
+              style={{ background: event.posterTheme.background }}
+            />
+          </>
+        )}
+
         {/* Overlay pattern for texture */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
 

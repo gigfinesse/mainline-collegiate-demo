@@ -3,10 +3,11 @@
 import { useSearchParams, redirect } from 'next/navigation';
 import { useApp } from '@/lib/context/AppContext';
 import { getHomeFeedForUser } from '@/lib/data/helpers';
-import { FriendActivityCard } from '@/components/feed/FriendActivityCard';
+import { FriendActivityCompactCard } from '@/components/feed/FriendActivityCompactCard';
 import { OrgEventCard } from '@/components/feed/OrgEventCard';
 import { OpenEventCard } from '@/components/feed/OpenEventCard';
 import { SparklesIcon } from '@heroicons/react/24/solid';
+import type { FeedItemFriendActivity, FeedItemOrgEvent, FeedItemOpenEvent } from '@/lib/types';
 
 export default function HomePage() {
   const { currentUser, rsvps } = useApp();
@@ -31,26 +32,33 @@ export default function HomePage() {
 
   const feedItems = getHomeFeedForUser(currentUser.id, rsvps);
 
+  // Separate feed items by type
+  const friendActivityItems = feedItems.filter(
+    (item): item is FeedItemFriendActivity => item.type === 'friend_activity',
+  );
+  const orgEventItems = feedItems.filter(
+    (item): item is FeedItemOrgEvent => item.type === 'org_event',
+  );
+  const openEventItems = feedItems.filter(
+    (item): item is FeedItemOpenEvent => item.type === 'open_event',
+  );
+
+  const hasAnyItems =
+    friendActivityItems.length > 0 ||
+    orgEventItems.length > 0 ||
+    openEventItems.length > 0;
+
   return (
-    <div className="px-4 pt-6 pb-4">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="text-xs font-bold tracking-[0.3em] text-neon-purple uppercase mb-2">
+    <div className="pb-4">
+      {/* Wordmark */}
+      <div className="px-4 pt-6 mb-5">
+        <div className="text-xs font-bold tracking-[0.3em] text-neon-purple uppercase">
           Mainline
         </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">
-            Hey {currentUser.firstName} <span aria-hidden="true">&#128075;</span>
-          </h1>
-        </div>
-        <p className="mt-1 text-sm text-gray-500">
-          See what&apos;s happening on campus
-        </p>
       </div>
 
-      {/* Feed */}
-      {feedItems.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+      {!hasAnyItems ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <SparklesIcon className="w-10 h-10 text-neon-purple/40 mb-3" />
           <p className="text-gray-400 font-medium">Nothing in your feed yet</p>
           <p className="text-xs text-gray-600 mt-1">
@@ -58,37 +66,60 @@ export default function HomePage() {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
-          {feedItems.map((item) => {
-            switch (item.type) {
-              case 'friend_activity':
-                return (
-                  <FriendActivityCard
+        <div className="space-y-6">
+          {/* Section 1: Your Friends Are Going */}
+          {friendActivityItems.length > 0 && (
+            <section>
+              <h2 className="px-4 mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+                Your Friends Are Going
+              </h2>
+              <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+                {friendActivityItems.map((item) => (
+                  <FriendActivityCompactCard
                     key={`fa-${item.event.id}`}
                     item={item}
                     buildHref={buildHref}
                   />
-                );
-              case 'org_event':
-                return (
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Section 2: From Your Orgs */}
+          {orgEventItems.length > 0 && (
+            <section className="px-4">
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+                From Your Orgs
+              </h2>
+              <div className="space-y-3">
+                {orgEventItems.map((item) => (
                   <OrgEventCard
                     key={`oe-${item.event.id}`}
                     item={item}
                     buildHref={buildHref}
                   />
-                );
-              case 'open_event':
-                return (
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Section 3: Happening at MSU */}
+          {openEventItems.length > 0 && (
+            <section className="px-4">
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+                Happening at MSU
+              </h2>
+              <div className="space-y-3">
+                {openEventItems.map((item) => (
                   <OpenEventCard
                     key={`open-${item.event.id}`}
                     item={item}
                     buildHref={buildHref}
                   />
-                );
-              default:
-                return null;
-            }
-          })}
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       )}
     </div>

@@ -11,7 +11,7 @@ function RoleBadge({ role }: { role: OrgRole }) {
   const config: Record<OrgRole, { bg: string; text: string; label: string }> = {
     exec: { bg: 'bg-neon-purple/20', text: 'text-neon-purple', label: 'Exec' },
     member: { bg: 'bg-neon-cyan/20', text: 'text-neon-cyan', label: 'Member' },
-    friend: { bg: 'bg-neon-pink/20', text: 'text-neon-pink', label: 'Friend' },
+    friend: { bg: 'bg-neon-pink/20', text: 'text-neon-pink', label: 'FoH' },
   };
   const c = config[role];
   return (

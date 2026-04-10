@@ -157,11 +157,25 @@ function EventRow({
       >
         {/* Poster gradient square */}
         <div
-          className="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center"
+          className="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center relative overflow-hidden"
           style={{ background: event.posterTheme.background }}
         >
+          {event.coverImageUrl && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={event.coverImageUrl}
+                alt={event.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-50"
+                style={{ background: event.posterTheme.background }}
+              />
+            </>
+          )}
           <span
-            className="text-[10px] font-extrabold text-center leading-tight px-1"
+            className="text-[10px] font-extrabold text-center leading-tight px-1 relative z-10"
             style={{ color: event.posterTheme.fontColor }}
           >
             {eventDate.toLocaleDateString('en-US', { month: 'short' })}

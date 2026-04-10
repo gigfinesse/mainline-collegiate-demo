@@ -1,7 +1,11 @@
 import type { User } from '@/lib/types';
 
-function avatar(seed: string): string {
-  return `https://api.dicebear.com/9.x/notionists/svg?seed=${seed}`;
+function menAvatar(id: number): string {
+  return `https://randomuser.me/api/portraits/men/${id}.jpg`;
+}
+
+function womenAvatar(id: number): string {
+  return `https://randomuser.me/api/portraits/women/${id}.jpg`;
 }
 
 export const users: User[] = [
@@ -13,7 +17,7 @@ export const users: User[] = [
     lastName: 'Thompson',
     email: 'marcus.thompson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Marcus'),
+    avatarUrl: menAvatar(32),
     bio: 'KSP social chair. Rally member. If you know, you know.',
   },
   {
@@ -23,7 +27,7 @@ export const users: User[] = [
     lastName: 'Chen',
     email: 'sarah.chen@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Sarah'),
+    avatarUrl: womenAvatar(44),
     bio: 'TD president & event queen. Philanthropy is my love language.',
   },
   {
@@ -33,7 +37,7 @@ export const users: User[] = [
     lastName: 'Rivera',
     email: 'jake.rivera@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Jake'),
+    avatarUrl: menAvatar(75),
     bio: 'KSP brother. Always down for a good time.',
   },
   {
@@ -43,7 +47,7 @@ export const users: User[] = [
     lastName: 'Patel',
     email: 'priya.patel@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Priya'),
+    avatarUrl: womenAvatar(63),
     bio: 'The Collective creative director. Art, music, vibes.',
   },
   {
@@ -53,7 +57,7 @@ export const users: User[] = [
     lastName: 'Brooks',
     email: 'tyler.brooks@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Tyler'),
+    avatarUrl: menAvatar(86),
     bio: 'Just a guy at MSU trying to find the move.',
   },
 
@@ -65,7 +69,7 @@ export const users: User[] = [
     lastName: 'Williams',
     email: 'emma.williams@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Emma'),
+    avatarUrl: womenAvatar(33),
     bio: 'TD social chair & party planner extraordinaire.',
   },
   {
@@ -75,7 +79,7 @@ export const users: User[] = [
     lastName: 'Johnson',
     email: 'liam.johnson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Liam'),
+    avatarUrl: menAvatar(22),
     bio: 'KSP rush chair. Come through.',
   },
   {
@@ -85,7 +89,7 @@ export const users: User[] = [
     lastName: 'Davis',
     email: 'olivia.davis@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Olivia'),
+    avatarUrl: womenAvatar(17),
   },
   {
     id: 'user-noah',
@@ -94,7 +98,7 @@ export const users: User[] = [
     lastName: 'Martinez',
     email: 'noah.martinez@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Noah'),
+    avatarUrl: menAvatar(45),
   },
   {
     id: 'user-ava',
@@ -103,7 +107,7 @@ export const users: User[] = [
     lastName: 'Garcia',
     email: 'ava.garcia@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Ava'),
+    avatarUrl: womenAvatar(28),
     bio: 'Rally hype girl. Game day is my personality.',
   },
   {
@@ -113,7 +117,7 @@ export const users: User[] = [
     lastName: 'Brown',
     email: 'ethan.brown@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Ethan'),
+    avatarUrl: menAvatar(55),
   },
   {
     id: 'user-sophia',
@@ -122,7 +126,7 @@ export const users: User[] = [
     lastName: 'Wilson',
     email: 'sophia.wilson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Sophia'),
+    avatarUrl: womenAvatar(71),
     bio: 'Phi Lambda sweetheart. TD sister.',
   },
   {
@@ -132,7 +136,7 @@ export const users: User[] = [
     lastName: 'Lee',
     email: 'mason.lee@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Mason'),
+    avatarUrl: menAvatar(15),
   },
   {
     id: 'user-isabella',
@@ -141,7 +145,7 @@ export const users: User[] = [
     lastName: 'Anderson',
     email: 'isabella.anderson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Isabella'),
+    avatarUrl: womenAvatar(52),
     bio: 'The Collective DJ. Catch me at the underground.',
   },
   {
@@ -151,7 +155,7 @@ export const users: User[] = [
     lastName: 'Thomas',
     email: 'aiden.thomas@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Aiden'),
+    avatarUrl: menAvatar(67),
   },
   {
     id: 'user-mia',
@@ -160,7 +164,7 @@ export const users: User[] = [
     lastName: 'Taylor',
     email: 'mia.taylor@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Mia'),
+    avatarUrl: womenAvatar(39),
   },
   {
     id: 'user-lucas',
@@ -169,7 +173,7 @@ export const users: User[] = [
     lastName: 'Jackson',
     email: 'lucas.jackson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Lucas'),
+    avatarUrl: menAvatar(11),
   },
   {
     id: 'user-charlotte',
@@ -178,7 +182,7 @@ export const users: User[] = [
     lastName: 'White',
     email: 'charlotte.white@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Charlotte'),
+    avatarUrl: womenAvatar(8),
   },
   {
     id: 'user-logan',
@@ -187,7 +191,7 @@ export const users: User[] = [
     lastName: 'Harris',
     email: 'logan.harris@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Logan'),
+    avatarUrl: menAvatar(41),
     bio: 'Phi Lambda VP. Exclusive vibes only.',
   },
   {
@@ -197,7 +201,7 @@ export const users: User[] = [
     lastName: 'Clark',
     email: 'amelia.clark@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Amelia'),
+    avatarUrl: womenAvatar(23),
   },
   {
     id: 'user-james',
@@ -206,7 +210,7 @@ export const users: User[] = [
     lastName: 'Lewis',
     email: 'james.lewis@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('James'),
+    avatarUrl: menAvatar(59),
   },
   {
     id: 'user-harper',
@@ -215,7 +219,7 @@ export const users: User[] = [
     lastName: 'Robinson',
     email: 'harper.robinson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Harper'),
+    avatarUrl: womenAvatar(14),
   },
   {
     id: 'user-ben',
@@ -224,7 +228,7 @@ export const users: User[] = [
     lastName: 'Walker',
     email: 'ben.walker@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Ben'),
+    avatarUrl: menAvatar(29),
   },
   {
     id: 'user-chloe',
@@ -233,7 +237,7 @@ export const users: User[] = [
     lastName: 'Hall',
     email: 'chloe.hall@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Chloe'),
+    avatarUrl: womenAvatar(46),
   },
   {
     id: 'user-daniel',
@@ -242,6 +246,6 @@ export const users: User[] = [
     lastName: 'Young',
     email: 'daniel.young@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: avatar('Daniel'),
+    avatarUrl: menAvatar(73),
   },
 ];

@@ -1,6 +1,7 @@
 'use client';
 
 import { getFriendsOfUser } from '@/lib/data/helpers';
+import { useUserProfile } from '@/lib/context/UserProfileContext';
 import type { Friendship } from '@/lib/types';
 
 interface FriendsListProps {
@@ -10,6 +11,7 @@ interface FriendsListProps {
 
 export function FriendsList({ userId }: FriendsListProps) {
   const friends = getFriendsOfUser(userId);
+  const { openProfile } = useUserProfile();
 
   if (friends.length === 0) {
     return null;
@@ -23,9 +25,11 @@ export function FriendsList({ userId }: FriendsListProps) {
 
       {/* Horizontal scroll */}
       <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-        {friends.map((friend, i) => (
-          <div
+        {friends.map((friend) => (
+          <button
             key={friend.id}
+            type="button"
+            onClick={() => openProfile(friend.id)}
             className="flex flex-col items-center flex-shrink-0 w-16"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -37,7 +41,7 @@ export function FriendsList({ userId }: FriendsListProps) {
             <p className="mt-1.5 text-[11px] text-gray-400 text-center truncate w-full">
               {friend.firstName}
             </p>
-          </div>
+          </button>
         ))}
       </div>
     </div>

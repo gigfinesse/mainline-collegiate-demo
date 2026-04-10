@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 import { AppProvider } from '@/lib/context/AppProvider';
+import { UserProfileProvider } from '@/lib/context/UserProfileContext';
 import './globals.css';
 
 const inter = Inter({
@@ -29,7 +30,9 @@ export default function RootLayout({
             </div>
           }
         >
-          <AppProvider>{children}</AppProvider>
+          <AppProvider>
+            <UserProfileProvider>{children}</UserProfileProvider>
+          </AppProvider>
         </Suspense>
       </body>
     </html>

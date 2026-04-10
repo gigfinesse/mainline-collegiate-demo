@@ -22,7 +22,7 @@ export const events: Event[] = [
     title: 'Welcome Back Rager',
     description:
       'KSP kicks off spring semester with the biggest party of the year. DJ, lights, the works.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #a855f7, #ec4899)',
       fontColor: '#ffffff',
@@ -45,7 +45,7 @@ export const events: Event[] = [
     title: 'Galentines Brunch',
     description:
       'TD sisterhood brunch. Mimosas, waffles, and matching outfits. Members only.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #ec4899, #f97316)',
       fontColor: '#ffffff',
@@ -69,7 +69,7 @@ export const events: Event[] = [
     title: 'Neon Nights',
     description:
       'Glow paint, UV lights, neon everything. Wear white. Our biggest darty of the spring.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #22d3ee, #a855f7)',
       fontColor: '#ffffff',
@@ -92,7 +92,7 @@ export const events: Event[] = [
     title: 'Spring Formal',
     description:
       'Annual Theta Delta Spring Formal. Black tie, open bar, DJ, and a night to remember.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #6366f1, #a855f7)',
       fontColor: '#ffffff',
@@ -115,7 +115,7 @@ export const events: Event[] = [
     title: 'Rush Week Kickoff',
     description:
       'Meet the brothers. Free food, games, and good vibes. Open to all.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #f97316, #ec4899)',
       fontColor: '#ffffff',
@@ -137,7 +137,7 @@ export const events: Event[] = [
     title: 'Underground Sessions Vol. 7',
     description:
       'Live DJ sets, visual art projections, spoken word. The Collective does it different.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #06060b, #6366f1)',
       fontColor: '#22d3ee',
@@ -160,7 +160,7 @@ export const events: Event[] = [
     title: 'Game Day Tailgate',
     description:
       'MSU vs. Rivals. Grills, cornhole, face paint, and school spirit. Everyone welcome!',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #f97316, #22d3ee)',
       fontColor: '#ffffff',
@@ -182,7 +182,7 @@ export const events: Event[] = [
     title: 'Phi Lambda Invite-Only',
     description:
       'An exclusive evening for brothers and close friends. Details shared privately.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #1a1a2e, #a855f7)',
       fontColor: '#ec4899',
@@ -205,7 +205,7 @@ export const events: Event[] = [
     title: 'Philanthropy Gala',
     description:
       'Raising money for children\'s literacy. Silent auction, performances, and dinner. Open to all MSU students.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #ec4899, #6366f1)',
       fontColor: '#ffffff',
@@ -227,7 +227,7 @@ export const events: Event[] = [
     title: 'Darty Szn',
     description:
       'It\'s that time again. KSP day party with pool, slip-n-slide, and guest DJ.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #22d3ee, #f97316)',
       fontColor: '#ffffff',
@@ -250,7 +250,7 @@ export const events: Event[] = [
     title: 'Gallery Night: New Perspectives',
     description:
       'Student art showcase. Paintings, photography, mixed media. Light refreshments.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #25253d, #22d3ee)',
       fontColor: '#ffffff',
@@ -272,7 +272,7 @@ export const events: Event[] = [
     title: 'Championship Watch Party',
     description:
       'Big screen, free wings, and Rally energy. Let\'s bring it home for MSU!',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #f97316, #ec4899)',
       fontColor: '#ffffff',
@@ -294,7 +294,7 @@ export const events: Event[] = [
     title: 'KSP x TD Mixer',
     description:
       'The collab everyone\'s been waiting for. KSP and Theta Delta throw down together.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #a855f7, #ec4899, #f97316)',
       fontColor: '#ffffff',
@@ -317,7 +317,7 @@ export const events: Event[] = [
     title: 'Pregame at PL',
     description:
       'Pre-game before the big event. Brothers and friends only.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #12121f, #ec4899)',
       fontColor: '#ffffff',
@@ -340,7 +340,7 @@ export const events: Event[] = [
     title: 'Open Mic Night',
     description:
       'Poets, rappers, singers, comedians. Sign up or just come watch. All talent welcome.',
-    coverImageUrl: '',
+    coverImageUrl: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&q=80',
     posterTheme: {
       background: 'linear-gradient(135deg, #6366f1, #22d3ee)',
       fontColor: '#ffffff',

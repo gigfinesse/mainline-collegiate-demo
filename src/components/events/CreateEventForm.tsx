@@ -68,8 +68,8 @@ const VISIBILITY_OPTIONS: {
   },
   {
     value: 'friends_and_members',
-    label: 'Friends & Members',
-    description: 'Members plus friends of the org',
+    label: 'FoH & Members',
+    description: 'Members plus friends of the house',
     icon: '🤝',
   },
   {

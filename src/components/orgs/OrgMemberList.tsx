@@ -21,7 +21,7 @@ function RoleBadge({ role }: { role: OrgRole }) {
       bg: 'bg-neon-pink/15',
       text: 'text-neon-pink',
       glow: '',
-      label: 'Friend',
+      label: 'FoH',
     },
   };
 
@@ -74,7 +74,7 @@ export function OrgMemberList({ orgId, userRole, onInvite }: OrgMemberListProps)
       )}
 
       {friends.length > 0 && (
-        <MemberGroup label="Friends" members={friends} startIndex={execs.length + regularMembers.length} />
+        <MemberGroup label="Friends of House" members={friends} startIndex={execs.length + regularMembers.length} />
       )}
     </div>
   );

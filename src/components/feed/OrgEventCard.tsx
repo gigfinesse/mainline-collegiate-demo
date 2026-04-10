@@ -55,11 +55,26 @@ export function OrgEventCard({ item, buildHref }: OrgEventCardProps) {
 
         {/* Event gradient thumbnail */}
         <div
-          className="mt-3 h-20 rounded-xl flex items-end p-3"
+          className="mt-3 h-20 rounded-xl flex items-end p-3 relative overflow-hidden"
           style={{ background: event.posterTheme.background }}
         >
+          {event.coverImageUrl && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={event.coverImageUrl}
+                alt={event.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div
+                className="absolute inset-0 opacity-50"
+                style={{ background: event.posterTheme.background }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            </>
+          )}
           <p
-            className="text-sm font-bold truncate"
+            className="text-sm font-bold truncate relative z-10"
             style={{ color: event.posterTheme.fontColor }}
           >
             {event.title}

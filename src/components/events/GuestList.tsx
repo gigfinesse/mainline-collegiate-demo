@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useApp } from '@/lib/context/AppContext';
+import { useUserProfile } from '@/lib/context/UserProfileContext';
 import { getRSVPsForEvent, getFriendsOfUser } from '@/lib/data/helpers';
 import type { Event } from '@/lib/types';
 
@@ -13,6 +14,7 @@ interface GuestListProps {
 
 export function GuestList({ event }: GuestListProps) {
   const { currentUser, rsvps } = useApp();
+  const { openProfile } = useUserProfile();
   const [showModal, setShowModal] = useState(false);
 
   const allRsvps = getRSVPsForEvent(event.id, rsvps);
@@ -70,7 +72,12 @@ export function GuestList({ event }: GuestListProps) {
           {sortedGoing.map(({ user }) => {
             const isFriend = friendIds.has(user.id);
             return (
-              <div key={user.id} className="flex-shrink-0 flex flex-col items-center gap-1">
+              <button
+                key={user.id}
+                type="button"
+                onClick={() => openProfile(user.id)}
+                className="flex-shrink-0 flex flex-col items-center gap-1"
+              >
                 <div
                   className={`rounded-full p-[2px] ${
                     isFriend
@@ -88,7 +95,7 @@ export function GuestList({ event }: GuestListProps) {
                 <span className="text-[10px] text-gray-400 max-w-[48px] truncate">
                   {user.firstName}
                 </span>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -142,6 +149,7 @@ export function GuestList({ event }: GuestListProps) {
                     color="text-emerald-400"
                     guests={sortedGoing}
                     friendIds={friendIds}
+                    onAvatarClick={openProfile}
                   />
                 )}
 
@@ -153,6 +161,7 @@ export function GuestList({ event }: GuestListProps) {
                     color="text-yellow-400"
                     guests={waitlisted}
                     friendIds={friendIds}
+                    onAvatarClick={openProfile}
                   />
                 )}
 
@@ -164,6 +173,7 @@ export function GuestList({ event }: GuestListProps) {
                     color="text-neon-orange"
                     guests={requested}
                     friendIds={friendIds}
+                    onAvatarClick={openProfile}
                   />
                 )}
               </div>
@@ -181,12 +191,14 @@ function GuestGroup({
   color,
   guests,
   friendIds,
+  onAvatarClick,
 }: {
   label: string;
   count: number;
   color: string;
   guests: { user: { id: string; firstName: string; lastName: string; avatarUrl: string } }[];
   friendIds: Set<string>;
+  onAvatarClick: (userId: string) => void;
 }) {
   return (
     <div>
@@ -197,7 +209,12 @@ function GuestGroup({
         {guests.map(({ user }) => {
           const isFriend = friendIds.has(user.id);
           return (
-            <div key={user.id} className="flex items-center gap-3">
+            <button
+              key={user.id}
+              type="button"
+              onClick={() => onAvatarClick(user.id)}
+              className="w-full flex items-center gap-3 text-left"
+            >
               <div
                 className={`rounded-full p-[2px] ${
                   isFriend
@@ -220,7 +237,7 @@ function GuestGroup({
                   Friend
                 </span>
               )}
-            </div>
+            </button>
           );
         })}
       </div>
