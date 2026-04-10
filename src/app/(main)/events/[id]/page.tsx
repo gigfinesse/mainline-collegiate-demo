@@ -2,9 +2,9 @@
 
 import { use } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { useApp } from '@/lib/context/AppContext';
-import { getOrgById } from '@/lib/data/helpers';
+import { getOrgById, getUserRoleInOrg } from '@/lib/data/helpers';
 import { EventHero } from '@/components/events/EventHero';
 import { RSVPButton } from '@/components/events/RSVPButton';
 import { GuestList } from '@/components/events/GuestList';
@@ -20,7 +20,7 @@ export default function EventDetailPage({
   const router = useRouter();
   const searchParams = useSearchParams();
   const userParam = searchParams.get('user');
-  const { events, rsvps } = useApp();
+  const { events, rsvps, currentUser } = useApp();
 
   // Find event from context (supports dynamically created events)
   const event = events.find((e) => e.id === id);
@@ -58,6 +58,11 @@ export default function EventDetailPage({
   const buildHref = (path: string) =>
     userParam ? `${path}?user=${userParam}` : path;
 
+  // Check if current user is an exec of the event's org
+  const isExec =
+    currentUser != null &&
+    getUserRoleInOrg(currentUser.id, event.orgId) === 'exec';
+
   // Capacity info
   const goingCount = rsvps.filter(
     (r) => r.eventId === event.id && r.status === 'going',
@@ -76,6 +81,17 @@ export default function EventDetailPage({
         <ArrowLeftIcon className="h-4 w-4" />
         Back
       </button>
+
+      {/* Edit button - floating over hero, only for execs */}
+      {isExec && (
+        <a
+          href={buildHref(`/events/${event.id}/edit`)}
+          className="absolute top-4 right-4 z-30 flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-md px-3 py-2 text-sm font-medium text-white hover:bg-black/60 transition-colors"
+        >
+          <PencilIcon className="h-4 w-4" />
+          Edit
+        </a>
+      )}
 
       {/* Hero */}
       <EventHero event={event} org={org} />

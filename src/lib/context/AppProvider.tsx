@@ -180,6 +180,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [currentUser],
   );
 
+  const updateEvent = useCallback(
+    (eventId: string, updates: Partial<Event>) => {
+      setEvents((prev) =>
+        prev.map((e) => (e.id === eventId ? { ...e, ...updates } : e)),
+      );
+    },
+    [],
+  );
+
   const value = useMemo(
     () => ({
       currentUser,
@@ -196,6 +205,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       acceptFriendRequest,
       declineFriendRequest,
       createEvent,
+      updateEvent,
     }),
     [
       currentUser,
@@ -212,6 +222,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       acceptFriendRequest,
       declineFriendRequest,
       createEvent,
+      updateEvent,
     ],
   );
 

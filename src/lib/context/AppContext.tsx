@@ -29,6 +29,7 @@ export interface AppContextValue {
   acceptFriendRequest: (requestId: string) => void;
   declineFriendRequest: (requestId: string) => void;
   createEvent: (event: Event) => void;
+  updateEvent: (eventId: string, updates: Partial<Event>) => void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);
