@@ -73,7 +73,9 @@ export function TabBar() {
                   active ? 'text-neon-purple' : 'text-gray-400 hover:text-gray-300'
                 }`}
               >
-                <Icon className="h-6 w-6" />
+                <span className="inline-block active:scale-90 transition-transform duration-100">
+                  <Icon className="h-6 w-6" />
+                </span>
                 <span className="text-[10px] font-medium">{tab.label}</span>
                 {active && (
                   <div className="h-[3px] w-4 rounded-full bg-gradient-to-r from-neon-purple to-neon-pink mt-0.5" />

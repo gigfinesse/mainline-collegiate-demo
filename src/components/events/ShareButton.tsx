@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useAnimate } from 'framer-motion';
 import { ShareIcon, XMarkIcon, LinkIcon } from '@heroicons/react/24/outline';
 
 interface ShareButtonProps {
@@ -18,6 +18,7 @@ const shareOptions = [
 export function ShareButton({ eventTitle }: ShareButtonProps) {
   const [showSheet, setShowSheet] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [scope, animate] = useAnimate();
 
   const handleShare = async (key: string) => {
     if (key === 'copy') {
@@ -26,6 +27,10 @@ export function ShareButton({ eventTitle }: ShareButtonProps) {
         showToast('Link copied!');
       } catch {
         showToast('Link copied!');
+      }
+      // Pulse animation on the main share button
+      if (scope.current) {
+        animate(scope.current, { scale: [1, 1.12, 1] }, { duration: 0.3, ease: 'easeOut' });
       }
     } else {
       const platform = shareOptions.find((o) => o.key === key)?.label || key;
@@ -43,6 +48,7 @@ export function ShareButton({ eventTitle }: ShareButtonProps) {
     <>
       {/* Share FAB */}
       <motion.button
+        ref={scope}
         whileTap={{ scale: 0.9 }}
         onClick={() => setShowSheet(true)}
         className="flex items-center gap-2 rounded-xl bg-dark-700 border border-dark-600 px-4 py-2.5 text-sm font-semibold text-white hover:border-neon-purple/40 transition-colors"
@@ -93,8 +99,9 @@ export function ShareButton({ eventTitle }: ShareButtonProps) {
               {/* Share options */}
               <div className="grid grid-cols-4 gap-3 px-5 pb-8 pt-2">
                 {shareOptions.map((option) => (
-                  <button
+                  <motion.button
                     key={option.key}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => handleShare(option.key)}
                     className="flex flex-col items-center gap-2 rounded-xl py-3 hover:bg-dark-700 transition-colors"
                   >
@@ -108,7 +115,7 @@ export function ShareButton({ eventTitle }: ShareButtonProps) {
                     <span className="text-[11px] font-medium text-gray-300">
                       {option.label}
                     </span>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>
@@ -120,9 +127,10 @@ export function ShareButton({ eventTitle }: ShareButtonProps) {
       <AnimatePresence>
         {toast && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             className="fixed bottom-24 left-1/2 z-[200] -translate-x-1/2 rounded-full bg-dark-700 border border-dark-600 px-5 py-2.5 text-sm font-medium text-white shadow-lg"
           >
             {toast}

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/lib/context/AppContext';
 import { useUserProfile } from '@/lib/context/UserProfileContext';
 import { getCommentsForEvent } from '@/lib/data/helpers';
@@ -31,8 +31,44 @@ export function CommentWall({ event }: CommentWallProps) {
   const { currentUser, comments, addComment, addReaction } = useApp();
   const { openProfile } = useUserProfile();
   const [text, setText] = useState('');
+  const [newCommentIds, setNewCommentIds] = useState<Set<string>>(new Set());
+  // Track per-comment, per-emoji "+1" floaters
+  const [reactionPops, setReactionPops] = useState<Record<string, string | null>>({});
 
   const eventComments = getCommentsForEvent(event.id, comments);
+  const prevCommentCountRef = useRef(eventComments.length);
+
+  // Detect newly added comments
+  useEffect(() => {
+    if (eventComments.length > prevCommentCountRef.current) {
+      // The last comment(s) are new
+      const newIds = eventComments.slice(prevCommentCountRef.current).map((c) => c.comment.id);
+      setNewCommentIds((prev) => {
+        const next = new Set(prev);
+        newIds.forEach((id) => next.add(id));
+        return next;
+      });
+      // Clear the "new" status after animation completes
+      setTimeout(() => {
+        setNewCommentIds((prev) => {
+          const next = new Set(prev);
+          newIds.forEach((id) => next.delete(id));
+          return next;
+        });
+      }, 400);
+    }
+    prevCommentCountRef.current = eventComments.length;
+  }, [eventComments]);
+
+  const handleReaction = useCallback((commentId: string, emoji: string) => {
+    addReaction(commentId, emoji);
+    // Show "+1" pop
+    const key = `${commentId}-${emoji}`;
+    setReactionPops((prev) => ({ ...prev, [key]: emoji }));
+    setTimeout(() => {
+      setReactionPops((prev) => ({ ...prev, [key]: null }));
+    }, 700);
+  }, [addReaction]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,10 +97,12 @@ export function CommentWall({ event }: CommentWallProps) {
             }
           }
 
+          const isNew = newCommentIds.has(comment.id);
+
           return (
             <div
               key={comment.id}
-              className="flex gap-3"
+              className={`flex gap-3${isNew ? ' animate-slide-in' : ''}`}
             >
               <button
                 type="button"
@@ -96,33 +134,57 @@ export function CommentWall({ event }: CommentWallProps) {
                 {/* Reactions row */}
                 <div className="flex flex-wrap items-center gap-1.5 mt-2">
                   {/* Existing reactions */}
-                  {Object.entries(reactionCounts).map(([emoji, { count, userReacted }]) => (
-                    <button
-                      key={emoji}
-                      onClick={() => addReaction(comment.id, emoji)}
-                      className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors ${
-                        userReacted
-                          ? 'bg-neon-purple/20 border border-neon-purple/40'
-                          : 'bg-dark-700 border border-dark-600 hover:border-dark-600/80'
-                      }`}
-                    >
-                      <span>{emoji}</span>
-                      <span className={userReacted ? 'text-neon-purple' : 'text-gray-400'}>
-                        {count}
-                      </span>
-                    </button>
-                  ))}
+                  {Object.entries(reactionCounts).map(([emoji, { count, userReacted }]) => {
+                    const popKey = `${comment.id}-${emoji}`;
+                    const showPop = reactionPops[popKey] != null;
+
+                    return (
+                      <div key={emoji} className="relative">
+                        <motion.button
+                          whileTap={{ scale: 1.4 }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                          onClick={() => handleReaction(comment.id, emoji)}
+                          className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors ${
+                            userReacted
+                              ? 'bg-neon-purple/20 border border-neon-purple/40'
+                              : 'bg-dark-700 border border-dark-600 hover:border-dark-600/80'
+                          }`}
+                        >
+                          <span>{emoji}</span>
+                          <span className={userReacted ? 'text-neon-purple' : 'text-gray-400'}>
+                            {count}
+                          </span>
+                        </motion.button>
+                        {/* +1 floater */}
+                        <AnimatePresence>
+                          {showPop && (
+                            <motion.span
+                              initial={{ opacity: 1, y: 0 }}
+                              animate={{ opacity: 0, y: -24 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.6, ease: 'easeOut' }}
+                              className="absolute -top-1 left-1/2 -translate-x-1/2 text-[10px] font-bold text-neon-purple pointer-events-none"
+                            >
+                              +1
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
 
                   {/* Quick add emoji bar */}
                   <div className="flex items-center gap-0.5 ml-1">
                     {REACTION_EMOJIS.filter((e) => !reactionCounts[e]).map((emoji) => (
-                      <button
+                      <motion.button
                         key={emoji}
-                        onClick={() => addReaction(comment.id, emoji)}
+                        whileTap={{ scale: 1.4 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                        onClick={() => handleReaction(comment.id, emoji)}
                         className="rounded-full p-1 text-xs opacity-40 hover:opacity-100 hover:bg-dark-700 transition-all"
                       >
                         {emoji}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
