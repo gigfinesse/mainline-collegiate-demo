@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mainline Collegiate Demo
 
-## Getting Started
+A front-end only demo of **Mainline Collegiate** — a social event calendar for college campuses, built to test UX flows for the collegiate market pivot.
 
-First, run the development server:
+**Live demo:** Deployed on Vercel. Visit the root URL to pick a demo user.
+
+## What is this?
+
+Mainline is pivoting from corporate talent bookings to the collegiate market. Fraternities and student orgs spend $100k+ on events annually. This app is the wedge — a social event calendar that captures the campus social graph and surfaces booking + sponsorship opportunities.
+
+The demo is a fully interactive front-end prototype with mock data for **Mainline State University (MSU)** — 5 orgs, 25 users, 19 events.
+
+## Demo Users
+
+| User | Slug | Perspective |
+|------|------|-----------|
+| Marcus Thompson | `?user=marcus` | Exec at KSP, member at Rally |
+| Sarah Chen | `?user=sarah` | Exec at TD, FoH at KSP |
+| Jake Rivera | `?user=jake` | Member at KSP |
+| Priya Patel | `?user=priya` | Member at The Collective, FoH at TD |
+| Tyler Brooks | `?user=tyler` | Rando — no org, just a student |
+
+## Key Features
+
+- **Home feed** — "Don't miss" hero cards for un-RSVP'd org events (glowing border, org nudge, member avatars), unified event feed below with social proof
+- **Three-option RSVP** — Going / Maybe / Can't Go with emoji celebration animations
+- **4-tier org model** — Exec > Member > FoH (Friend of House) > Rando, with tier-based event visibility and RSVP rules
+- **Greek letters** — ΚΣΠ, ΘΔ, ΦΛ used as primary identifiers for Greek orgs with custom SVG logos
+- **Event creation + editing** — Exec-only, with poster theme customizer (8 gradient presets)
+- **Clickable user profiles** — Tap any avatar to see bio, orgs, shared events, add friend
+- **Notifications** — Bell icon with unread badge, event reminders, capacity alerts, org announcements, friend RSVPs
+- **Comments + reactions** — Emoji reactions with pop animations, comment slide-in
+- **Friend graph** — Auto within orgs, mutual requests outside. Social proof on feed cards.
+- **Share** — Copy link, iMessage, Snapchat, Instagram (simulated)
+- **User switching** — URL param `?user=slug` or switcher in Profile tab
+
+## Tech Stack
+
+| Technology | Purpose |
+|-----------|---------|
+| Next.js 16 (App Router) | React framework |
+| Tailwind CSS v4 | Styling |
+| TypeScript | Type safety |
+| framer-motion | Interactive animations (modals, RSVP celebrations) |
+| Static mock data | JSON/TS files, no backend |
+| React Context | Local state management |
+| Vercel | Hosting |
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Opens on `http://localhost:3000`. Visit `/?user=marcus` to enter the app, or just `/` for the welcome/user picker.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/
+    (main)/              # Tab bar layout group
+      page.tsx           # Home feed
+      events/            # My Events + event detail + edit
+      orgs/              # My Orgs + org detail + create event
+      profile/           # Profile
+      notifications/     # Notifications page
+    welcome/             # User picker landing page
+    layout.tsx           # Root layout with providers
+  components/
+    events/              # Event hero, RSVP button, guest list, comments, share, forms
+    feed/                # Feed cards, don't miss hero
+    layout/              # App shell, tab bar
+    orgs/                # Org header, member list, event list, invite modal
+    profile/             # Profile header, friends, friend requests, user switcher, user profile modal
+    shared/              # Reusable components (UserAvatar)
+  lib/
+    context/             # AppContext, AppProvider, UserProfileContext
+    data/                # Mock data + helper functions
+    types.ts             # TypeScript interfaces
+    tagColors.ts         # Per-tag color mapping
+```
 
-## Learn More
+## Design Decisions
 
-To learn more about Next.js, take a look at the following resources:
+- **Dark mode with neon Gen Z aesthetic** — not corporate, not boring. Gradient accents, emoji, casual copy.
+- **Org-first, not individual-first** — differentiates from Partiful/Doorlist
+- **FoH (Friend of House)** — renamed from "Friend" to avoid confusion with the friend graph
+- **Greek letters as primary identifiers** — authentic to how Greek life works
+- **Event-first feed cards** — photos lead, social proof is secondary
+- **No backend** — all interactions are local state, resets on refresh. Designed for UX testing, not production.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design Doc
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Full product design document at `docs/plans/2026-04-10-mainline-collegiate-design.md`.

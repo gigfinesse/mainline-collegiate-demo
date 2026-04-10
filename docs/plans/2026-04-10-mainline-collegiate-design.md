@@ -1,7 +1,7 @@
 # Mainline Collegiate — Product Design Document
 
 **Date:** 2026-04-10
-**Status:** Approved
+**Status:** Approved (updated to reflect demo as built)
 **Scope:** Front-end demo (no backend)
 
 ---
@@ -28,12 +28,11 @@ The calendar is the wedge. Booking and sponsorship are the business model.
 |---|---------|---------|-------------------|
 | Structure | Individual-first | Individual-first | Org-first |
 | Discovery | Share links only | Share links only | Social feed + friend graph |
-| Access tiers | None | None | Exec / Member / Friend / Rando |
-| Revenue model | Free (no monetization) | Ticketing (100% to host) | Talent booking + brand sponsorship |
-| Event customization | Strong (themes, fonts, posters) | Basic | Strong (matching Partiful) |
-| Social features | Comments, reactions, photo albums | Basic guest list | Comments, reactions, friend activity feed |
-
-**Key differentiators:** Org-based structure with tiered access, social discovery feed driven by friend graph, and the booking/sponsorship pipeline underneath.
+| Access tiers | None | None | Exec / Member / FoH / Rando |
+| RSVP options | Going / Maybe / Can't Go | Going | Going / Maybe / Can't Go |
+| Revenue model | Free | Ticketing (100% to host) | Talent booking + brand sponsorship |
+| Event customization | Strong | Basic | Strong (poster themes) |
+| Social features | Comments, reactions, photos | Basic guest list | Comments, reactions, friend activity feed, notifications |
 
 ---
 
@@ -41,28 +40,27 @@ The calendar is the wedge. Booking and sponsorship are the business model.
 
 ### 2.1 Sign-Up
 
-Students sign up with a **.edu email address**. The email domain auto-assigns them to a school (e.g., `@mainlinestate.edu` → Mainline State University). This gates access and ensures campus-level trust.
-
-In the demo, sign-up is simulated. Users are pre-created.
+Students sign up with a **.edu email address**. The email domain auto-assigns them to a school. In the demo, users are pre-created.
 
 ### 2.2 User Tiers (Per Org)
 
-A user's tier is **per org** — someone can be an exec at one org and a friend at another. A user with no org affiliation is a "rando" at the school level.
+A user's tier is **per org** — someone can be an exec at one org and FoH at another.
 
 | Tier | Who | How They Get In | Capabilities |
 |------|-----|----------------|-------------|
-| **Exec** | Social chair, president, rush chair, etc. | Org creator is first exec; other execs promoted by existing execs | Create/manage events, invite members + friends, manage roster, org settings |
-| **Member** | Brothers/sisters, club members | Invited by an exec | View all org events, auto-RSVP priority, invite friends of the house, auto-friended with all org members |
-| **Friend** | Frequent guests, "friends of the house" | Invited by an exec or member | Priority RSVP (below members), see org's open + friends-visible events |
-| **Rando** | Any student at the school | .edu sign-up | Browse open events, request-based RSVP for exclusive ones |
+| **Exec** | Social chair, president, etc. | Org creator is first exec; promoted by existing execs | Create/edit/manage events, invite members + FoH, manage roster, org settings |
+| **Member** | Brothers/sisters, club members | Invited by an exec | View all org events, auto-RSVP priority, invite FoH, auto-friended with org-mates |
+| **FoH** (Friend of House) | Frequent guests | Invited by an exec or member | Priority RSVP (below members), see org's open + FoH-visible events |
+| **Rando** | Any student at the school | .edu sign-up | Browse open events, request-based RSVP |
 
 A user can belong to **multiple orgs** with different roles in each.
 
 ### 2.3 Friend Graph
 
-- **Auto-friending within orgs:** All members and execs of the same org are automatically friends. No action needed.
-- **Mutual requests outside orgs:** Send a friend request, other person accepts. Both then see each other's RSVP activity in their feed.
+- **Auto-friending within orgs:** All members and execs of the same org are automatically friends.
+- **Mutual requests outside orgs:** Send a friend request, other person accepts.
 - Friends are app-wide, not per-org.
+- Tapping any user avatar opens a profile modal showing their bio, orgs, shared events, and friend/request status.
 
 ---
 
@@ -74,39 +72,40 @@ A verified campus organization — fraternity, sorority, club, or student org. N
 
 ### 3.2 Org Types
 
-- Fraternity
-- Sorority
-- Club
-- Student Organization
+- Fraternity (🏛)
+- Sorority (💜)
+- Club (🎨)
+- Student Organization (⚡)
 
-### 3.3 Org Creation
+### 3.3 Greek Letters
 
-Application-based:
-1. A student submits: org name, type, school, their role, and any supporting info.
-2. Mainline reviews and approves/denies.
-3. Once approved, the applicant becomes the first exec.
+Greek orgs display their Greek letters as the primary identifier:
+- Kappa Sigma Pi → **ΚΣΠ**
+- Theta Delta → **ΘΔ**
+- Phi Lambda → **ΦΛ**
 
-In the demo, orgs are pre-created and pre-populated.
+Custom SVG logos are generated with Greek letters on gradient backgrounds. Non-Greek orgs use themed emoji logos.
 
-### 3.4 Org Page
+### 3.4 Org Creation
 
-Contains:
-- Org name, logo/photo, description, type
-- Upcoming events list
-- Past events
-- Member roster (visible to members and friends only)
-- Exec controls: manage members, manage friends, create events, org settings
+Application-based. In the demo, orgs are pre-created and pre-populated.
 
-### 3.5 Membership Management
+### 3.5 Org Page
+
+- Org logo, Greek letters (large for Greek orgs), full name, type badge, description
+- Events tab (upcoming + past) with cover images
+- Members tab grouped by role: Execs > Members > FoH
+- Create Event button (exec only)
+- Invite modal (invite as Member or FoH)
+
+### 3.6 Membership Management
 
 | Action | Who Can Do It |
 |--------|--------------|
 | Invite members | Execs only |
-| Invite friends | Execs and members |
-| Remove members/friends | Execs only |
+| Invite FoH | Execs and members |
+| Remove members/FoH | Execs only |
 | Promote to exec / demote | Execs only |
-
-Invitations are via invite link or direct add (search by name).
 
 ---
 
@@ -117,39 +116,44 @@ Invitations are via invite link or direct add (search by name).
 | Field | Details |
 |-------|---------|
 | Title | Required |
-| Description | Optional, rich text |
-| Cover image / poster | Customizable — pick a template (themes, fonts, colors, backgrounds) or upload custom image |
+| Description | Optional |
+| Cover image | Unsplash photos with poster theme gradient overlay |
+| Poster theme | 8 gradient presets (purple-pink, cyan-purple, etc.) |
 | Date & time | Start + end |
-| Location | Free text + optional map pin |
-| Visibility | Members Only / Friends & Members / Open |
-| Capacity | Optional cap. Enables waitlist when full. |
-| Tags / vibe | Darty, Formal, Mixer, Rush, Philanthropy, Tailgate, Party, Concert, etc. |
-| Cost | Free or cover charge (amount) |
-| Programming flag | "We want talent for this event" — hidden from attendees, signal to Mainline team. Modeled in data but not shown in demo UI. |
+| Location | Free text |
+| Visibility | Members Only / FoH & Members / Open |
+| Capacity | Optional cap with waitlist |
+| Tags / vibe | darty, formal, mixer, rush, philanthropy, tailgate, party, concert, pregame, social — each with unique color |
+| Cost | Free or cover charge |
 
-### 4.2 Event Creation
+### 4.2 Event Creation & Editing
 
-- Only **org execs** can create events.
-- Creation happens from within the org page.
-- Flow: fill out fields → customize poster/cover → preview → publish.
+- Only **org execs** can create and edit events.
+- Creation from org page, editing from event detail page (Edit button, exec only).
+- Poster theme customizer with live preview.
 
 ### 4.3 Event Visibility & RSVP Rules
 
-| Visibility | Execs | Members | Friends | Randos |
+| Visibility | Execs | Members | FoH | Randos |
 |-----------|-------|---------|---------|--------|
 | **Members Only** | Auto-in | Auto-in | Can't see | Can't see |
-| **Friends & Members** | Auto-in | Auto-in | Auto-in | Can't see |
-| **Open** | Auto-in | Auto-in | Priority waitlist | Request / waitlist |
+| **FoH & Members** | Auto-in | Auto-in | Auto-in | Can't see |
+| **Open** | Auto-in | Auto-in | Priority | Request / waitlist |
 
-**Waitlist logic:**
-- When capacity is set and fills: friends get priority position over randos.
-- When no capacity set: open events are open to all, friends auto-approved, randos may need approval per org preference.
+### 4.4 RSVP System
 
-### 4.4 Event Social Features
+Three-option RSVP (like Partiful):
+- **Going** — committed, counts toward capacity, shown on guest list
+- **Maybe** — interested, shown separately on guest list (lighter styling), doesn't count toward capacity
+- **Can't Go** — explicit no, removed from nudges, hidden from guest list
 
-- **Guest list** — visible on event page. Friends highlighted at top. Shows count ("42 going, 8 waitlisted").
-- **Comments / reactions wall** — attendees can post comments, reply, react with emojis. Pre-event hype and post-event discussion.
-- **Sharing** — native share to iMessage, Snapchat, Instagram Stories, copy link. Shared link shows a preview (poster, title, date) with "Open in app" / RSVP action.
+Status-aware buttons with change options. Emoji celebration animations on RSVP actions.
+
+### 4.5 Event Social Features
+
+- **Guest list** — Going and Maybe groups, friends highlighted. Expandable modal.
+- **Comments / reactions** — Emoji reactions (🔥 ❤️ 😂 🙌 💀) with pop animations, comment slide-in.
+- **Sharing** — Copy link, iMessage, Snapchat, Instagram (simulated).
 
 ---
 
@@ -157,74 +161,45 @@ Invitations are via invite link or direct add (search by name).
 
 ### 5.1 Tab Bar (4 tabs, mobile-first)
 
-| Tab | Icon | Content |
-|-----|------|---------|
-| **Home** | House | Personalized social feed |
-| **My Events** | Calendar | Events you're attending + hosting |
-| **My Orgs** | People | List of your orgs, tap into any |
-| **Profile** | Person | Your info, friends, notifications, settings |
+| Tab | Content |
+|-----|---------|
+| **Home** | Event feed with don't miss hero + unified event cards |
+| **My Events** | Events you're attending/maybe/hosting (upcoming + past) |
+| **My Orgs** | Your orgs sorted by role (exec > member > FoH) |
+| **Profile** | Info, friends, friend requests, demo user switcher |
 
 ### 5.2 Home Feed
 
-The home feed is social-first, not just a listing. Items are ordered by relevance:
+Two sections:
 
-1. **Friends' RSVPs** — "Jake, Mike + 3 others are going to Kappa Sig Darty" — tap to see event. Sorted by number of friends going.
-2. **New org events** — "Theta Delta just posted Spring Formal" — events from orgs you belong to.
-3. **Open events** — Open events at your school, sorted by date / popularity.
+**"don't miss"** — Hero cards for un-RSVP'd events from your orgs:
+- Glowing gradient border (purple → pink → orange) to differentiate from feed
+- Org logo, Greek letters, capacity, date/time, location
+- Member avatars + org-specific nudge ("5 brothers already going")
+- Urgency labels ("tonight 🔥", "filling up fast 🔥")
+- Dismiss (✕) button to remove from feed
+- Swipeable with dot indicators
+- Tapping goes to event detail (no inline RSVP)
 
-### 5.3 My Events
+**"what's on at MSU 🎓"** — Unified event feed:
+- Event-first cards: cover photo hero, title, org, date/location, colorful tags
+- Social proof at bottom: friend avatars + "Jake + 3 friends going"
+- All event types use the same card style
+- Sorted by: friend activity count (most friends going first), then org events, then open events
 
-Your personal event calendar:
-- **Upcoming** — events you've RSVP'd to or are hosting, sorted by date.
-- **Past** — previous events you attended.
-- Hosting badge on events you created.
+### 5.3 Notifications
 
-### 5.4 My Orgs
+- Bell icon in home page header with unread badge count
+- Full notifications page with types: event reminders, capacity alerts, org announcements, friend RSVPs, friend accepts, event updates
+- Unread indicators (purple dot + left border), mark as read on tap, mark all as read
 
-- List of orgs you're a member/exec/friend of, with your role shown.
-- Tap into an org to see its org page.
-- If you're not in any org, show a prompt to apply to create one.
+### 5.4 Welcome Page
 
-### 5.5 Event Detail Screen
-
-The flagship screen:
-- Hero: cover image / customized poster
-- Title, hosted by [Org], date/time, location (map link)
-- Tags / vibe badges
-- Cost indicator
-- RSVP button (behavior varies by tier — "Going", "Request to Join", "Waitlisted")
-- Capacity indicator ("42/100 spots")
-- Guest list (friends at top, then others)
-- Comments / reactions wall
-- Share button
-
-### 5.6 Org Page
-
-- Org header: name, logo, description, type
-- Tab or section split: Events | Members
-- Events: upcoming + past
-- Members: roster visible to members/friends (shows execs, members, friends with role badges)
-- Exec actions: Create Event button, Manage Members, Org Settings
-
-### 5.7 Create Event Flow
-
-Accessed from org page (exec only):
-1. Title + description
-2. Date/time picker
-3. Location
-4. Cover image / poster customization (templates, themes, fonts, colors)
-5. Visibility selector (Members Only / Friends & Members / Open)
-6. Capacity (optional)
-7. Tags / vibe
-8. Cost (free / cover amount)
-9. Preview → Publish
-
-### 5.8 Other Screens
-
-- **Friend requests** — list of incoming requests, accept/decline
-- **Invite members/friends** — search by name or share invite link
-- **Notifications** — RSVP confirmations, friend requests, new events from orgs, comments on events you're attending
-- **Profile editing** — name, photo, school, bio
+Landing page at `/welcome` (or `/` without user param):
+- MAINLINE Collegiate branding
+- Tier legend (Exec, Member, Friend, Rando)
+- 5 demo user cards with photos, roles, descriptions
+- Clicking enters the app as that user
 
 ---
 
@@ -232,14 +207,18 @@ Accessed from org page (exec only):
 
 **Dark mode with vibrant Gen Z energy.**
 
-- Dark base (not pure black — dark grays, deep navy/charcoal)
-- Neon and vibrant accent colors — electric purples, hot pinks, bright greens, gradient splashes
-- Colorful event cards and tags that pop against the dark background
-- Bold, modern typography
-- Rounded corners, smooth animations
-- Gradient backgrounds on event posters and hero areas
-- Think: dark mode Instagram meets Spotify's color energy
-- The vibe is fun, exclusive, and aspirational — not corporate
+- Dark base (deep navy/charcoal, not pure black)
+- Neon accent colors: purple, pink, cyan, orange, indigo
+- Colorful per-tag vibe pills (amber darty, violet formal, pink mixer, etc.)
+- Gradient MAINLINE wordmark
+- Casual lowercase section headers with emoji
+- Playful RSVP badges ("going ✓", "hosting 🎤", "requested 🤞")
+- Fun empty states ("it's quiet... too quiet 👀")
+- Real Unsplash photos for events and org covers
+- College-age Unsplash portraits for user photos
+- Custom SVG logos with Greek letters for Greek orgs
+- Micro-interaction animations: RSVP emoji bursts, reaction pops, comment slide-ins, tab bar bounces
+- iOS zoom prevention on input focus
 
 ---
 
@@ -249,63 +228,41 @@ Accessed from org page (exec only):
 
 | Technology | Purpose |
 |-----------|---------|
-| **Next.js** (App Router) | React framework, matches Mainline ecosystem |
-| **Tailwind CSS** | Mobile-first styling |
-| **Static JSON mock data** | Users, orgs, events, RSVPs, comments, friendships |
-| **React state / context** | Simulating interactions (RSVP, comments, friend requests) |
-| **Vercel** | Hosting for easy sharing |
+| Next.js 16 (App Router) | React framework |
+| Tailwind CSS v4 | Mobile-first styling |
+| TypeScript | Type safety |
+| framer-motion | Interactive animations (modals, celebrations) |
+| Static mock data | Users, orgs, events, RSVPs, comments, notifications |
+| React Context | State management (RSVP, comments, friend requests, dismiss) |
+| Vercel | Hosting |
 
 ### 7.2 Mock Data — Mainline State University
 
 **Orgs:**
-| Org | Type | Vibe |
-|-----|------|------|
-| Kappa Sigma Pi | Fraternity | The big party frat |
-| Theta Delta | Sorority | Social + philanthropic |
-| The Collective | Club | Creative arts, underground events |
-| Rally | Student Org | Sports, tailgates, game day |
-| Phi Lambda | Fraternity | Smaller, exclusive |
+| Org | Greek | Type | Logo |
+|-----|-------|------|------|
+| Kappa Sigma Pi | ΚΣΠ | Fraternity | Greek letters on purple gradient |
+| Theta Delta | ΘΔ | Sorority | Greek letters on pink gradient |
+| The Collective | — | Club | 🎨 on indigo gradient |
+| Rally | — | Student Org | 🏟️ on orange gradient |
+| Phi Lambda | ΦΛ | Fraternity | Greek letters on dark-purple gradient |
 
-~20-30 fake students spread across these orgs with varying roles (execs, members, friends) and cross-org friendships. ~10-15 events at different visibility levels, dates, and vibes.
+25 users, 19 events, ~150 RSVPs, 30 comments, 17 notifications.
 
 ### 7.3 Demo User Switching
 
-- **Primary mechanism:** URL query parameter — `?user=jake`, `?user=sarah`, `?user=marcus`
-- Each demo user has a different perspective (exec at one org, member at another, friend, rando)
-- Small unobtrusive indicator in the Profile tab showing current demo user with quick-switch option
-- Easy to share specific perspectives: "Check out the exec view: mainline-demo.vercel.app?user=marcus"
+- URL query parameter: `?user=marcus`, `?user=sarah`, etc.
+- Switcher in Profile tab
+- No param → redirects to `/welcome` picker page
 
-### 7.4 Demo Preset Users
-
-| User | Perspective |
-|------|-----------|
-| Marcus | Exec at Kappa Sigma Pi, member at Rally |
-| Sarah | Exec at Theta Delta, friend of Kappa Sigma Pi |
-| Jake | Member at Kappa Sigma Pi |
-| Priya | Member at The Collective, friend of Theta Delta |
-| Tyler | Rando — no org affiliation, just a student at MSU |
-
-### 7.5 What the Demo Includes
-
-- Full navigation (Home, My Events, My Orgs, Profile)
-- Event browsing, detail view, RSVP flow (tier-appropriate behavior)
-- Event creation flow with poster customization
-- Org pages with member lists
-- Social feed with friend activity
-- Comments and reactions on events
-- Friend requests (send/accept)
-- Invite members/friends to org
-- Sharing UI (native share sheet simulation)
-- Responsive mobile-first design
-
-### 7.6 What the Demo Does NOT Include
+### 7.4 What the Demo Does NOT Include
 
 - Real authentication / .edu email verification
 - Org application and approval flow
 - Talent booking / programming flag UI
 - Brand sponsorship dashboard
-- Push notifications
-- Actual image upload (use preset images/templates)
+- Push notifications (mock notifications only)
+- Actual image upload (preset images/templates)
 - Data persistence (refresh = reset to mock data)
 - Backend API
 
@@ -313,16 +270,14 @@ Accessed from org page (exec only):
 
 ## 8. Future Considerations (Post-Demo)
 
-These are not in scope for the demo but are noted for the full product roadmap:
-
-- **Talent booking integration** — Orgs flag events needing programming, Mainline team sees pipeline
-- **Brand sponsorship marketplace** — Event data shared with brand partners, sponsors select events
-- **Real auth + .edu verification** — Email verification flow
-- **Org approval workflow** — Application review by Mainline team
-- **Multi-school support** — Students at nearby schools can discover cross-campus events
-- **Ticketing / payments** — Cover charge collection, Venmo/Cash App integration
-- **Shared photo albums** — Post-event photo sharing (Partiful feature)
-- **Polling / coordination** — Date polling, guest questions
-- **Text blasts** — Org-wide or event-wide announcements
-- **Push notifications** — RSVP confirmations, event reminders, friend activity
-- **Analytics dashboard** — For Mainline team: event volume, org engagement, booking conversion
+- **Talent booking integration** — Orgs flag events needing programming
+- **Brand sponsorship marketplace** — Event data shared with brand partners
+- **Real auth + .edu verification**
+- **Org approval workflow**
+- **Multi-school support** — cross-campus event discovery
+- **Ticketing / payments** — cover charge collection
+- **Shared photo albums** — post-event photos
+- **Polling / coordination** — date polling, guest questions
+- **Text blasts** — org/event announcements
+- **Push notifications**
+- **Analytics dashboard** — event volume, engagement, booking conversion
