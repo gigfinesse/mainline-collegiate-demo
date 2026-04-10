@@ -130,4 +130,27 @@ export const rsvps: RSVP[] = [
   { eventId: 'evt-6', userId: 'user-mia', status: 'waitlisted', respondedAt: at(0) },
   { eventId: 'evt-8', userId: 'user-mason', status: 'waitlisted', respondedAt: at(0) },
   { eventId: 'evt-14', userId: 'user-sophia', status: 'waitlisted', respondedAt: at(0) },
+
+  // ── evt-16: Blackout Party (KSP, un-RSVP'd by Marcus) ──
+  { eventId: 'evt-16', userId: 'user-jake', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-16', userId: 'user-liam', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-16', userId: 'user-noah', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-16', userId: 'user-ethan', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-16', userId: 'user-mason', status: 'going', respondedAt: at(0) },
+
+  // ── evt-17: Rivalry Week Cookout (Rally, un-RSVP'd by Marcus) ──
+  { eventId: 'evt-17', userId: 'user-ava', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-17', userId: 'user-ethan', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-17', userId: 'user-ben', status: 'going', respondedAt: at(0) },
+
+  // ── evt-18: Sunset Rooftop Social (TD, un-RSVP'd by Sarah) ──
+  { eventId: 'evt-18', userId: 'user-emma', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-18', userId: 'user-olivia', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-18', userId: 'user-sophia', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-18', userId: 'user-mia', status: 'going', respondedAt: at(0) },
+
+  // ── evt-19: Senior Send-Off (KSP, un-RSVP'd by Marcus & Jake) ──
+  { eventId: 'evt-19', userId: 'user-liam', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-19', userId: 'user-noah', status: 'going', respondedAt: at(0) },
+  { eventId: 'evt-19', userId: 'user-aiden', status: 'going', respondedAt: at(0) },
 ];
