@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useSearchParams, redirect } from 'next/navigation';
 import { useApp } from '@/lib/context/AppContext';
 import { getHomeFeedForUser, getUnRsvpdOrgEventsForUser } from '@/lib/data/helpers';
-import { FriendActivityCompactCard } from '@/components/feed/FriendActivityCompactCard';
+import { FriendActivityCard } from '@/components/feed/FriendActivityCard';
 import { OrgEventCard } from '@/components/feed/OrgEventCard';
 import { OpenEventCard } from '@/components/feed/OpenEventCard';
-import { OrgEventNudgeCard } from '@/components/feed/OrgEventNudgeCard';
+import { DontMissHero } from '@/components/feed/DontMissHero';
 import { SparklesIcon } from '@heroicons/react/24/solid';
 import { BellIcon } from '@heroicons/react/24/outline';
 import type { FeedItemFriendActivity, FeedItemOrgEvent, FeedItemOpenEvent } from '@/lib/types';
@@ -36,22 +36,8 @@ export default function HomePage() {
   const feedItems = getHomeFeedForUser(currentUser.id, rsvps);
   const unRsvpdOrgEvents = getUnRsvpdOrgEventsForUser(currentUser.id, rsvps);
 
-  // Separate feed items by type
-  const friendActivityItems = feedItems.filter(
-    (item): item is FeedItemFriendActivity => item.type === 'friend_activity',
-  );
-  const orgEventItems = feedItems.filter(
-    (item): item is FeedItemOrgEvent => item.type === 'org_event',
-  );
-  const openEventItems = feedItems.filter(
-    (item): item is FeedItemOpenEvent => item.type === 'open_event',
-  );
-
-  const hasAnyItems =
-    friendActivityItems.length > 0 ||
-    orgEventItems.length > 0 ||
-    openEventItems.length > 0 ||
-    unRsvpdOrgEvents.length > 0;
+  const hasAnyFeedItems = feedItems.length > 0;
+  const hasAnyItems = hasAnyFeedItems || unRsvpdOrgEvents.length > 0;
 
   return (
     <div className="pb-4">
@@ -73,83 +59,50 @@ export default function HomePage() {
       {!hasAnyItems ? (
         <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <SparklesIcon className="w-10 h-10 text-neon-purple/40 mb-3" />
-          <p className="text-gray-400 font-medium">it&apos;s quiet... too quiet 👀</p>
+          <p className="text-gray-400 font-medium">it&apos;s quiet... too quiet</p>
           <p className="text-xs text-gray-600 mt-1">
             join some orgs and add friends to get in the loop
           </p>
         </div>
       ) : (
-        <div className="space-y-6">
-          {/* Section 1: Your Friends Are Going */}
-          {friendActivityItems.length > 0 && (
-            <section>
-              <h2 className="px-4 mb-3 text-base font-bold text-white">
-                friends are pulling up 🔥
-              </h2>
-              <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
-                {friendActivityItems.map((item) => (
-                  <FriendActivityCompactCard
-                    key={`fa-${item.event.id}`}
-                    item={item}
-                    buildHref={buildHref}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Section 2: Don't Miss - Un-RSVP'd org events */}
+        <div className="space-y-2">
+          {/* Don't Miss Hero — swipeable featured cards */}
           {unRsvpdOrgEvents.length > 0 && (
-            <section>
-              <h2 className="px-4 mb-3 text-base font-bold text-white">
-                don&apos;t miss 👀
-              </h2>
-              <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
-                {unRsvpdOrgEvents.map(({ event, org }) => (
-                  <div key={`nudge-${event.id}`} className="flex-shrink-0 w-[180px]">
-                    <OrgEventNudgeCard
-                      event={event}
-                      org={org}
-                      buildHref={buildHref}
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
+            <DontMissHero events={unRsvpdOrgEvents} buildHref={buildHref} />
           )}
 
-          {/* Section 3: From Your Orgs */}
-          {orgEventItems.length > 0 && (
+          {/* Unified Feed */}
+          {hasAnyFeedItems && (
             <section className="px-4">
-              <h2 className="mb-3 text-base font-bold text-white">
-                from your orgs ✨
-              </h2>
               <div className="space-y-3">
-                {orgEventItems.map((item) => (
-                  <OrgEventCard
-                    key={`oe-${item.event.id}`}
-                    item={item}
-                    buildHref={buildHref}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Section 4: Happening at MSU */}
-          {openEventItems.length > 0 && (
-            <section className="px-4">
-              <h2 className="mb-3 text-base font-bold text-white">
-                happening at MSU 🎉
-              </h2>
-              <div className="space-y-3">
-                {openEventItems.map((item) => (
-                  <OpenEventCard
-                    key={`open-${item.event.id}`}
-                    item={item}
-                    buildHref={buildHref}
-                  />
-                ))}
+                {feedItems.map((item) => {
+                  switch (item.type) {
+                    case 'friend_activity':
+                      return (
+                        <FriendActivityCard
+                          key={`fa-${item.event.id}`}
+                          item={item as FeedItemFriendActivity}
+                          buildHref={buildHref}
+                        />
+                      );
+                    case 'org_event':
+                      return (
+                        <OrgEventCard
+                          key={`oe-${item.event.id}`}
+                          item={item as FeedItemOrgEvent}
+                          buildHref={buildHref}
+                        />
+                      );
+                    case 'open_event':
+                      return (
+                        <OpenEventCard
+                          key={`open-${item.event.id}`}
+                          item={item as FeedItemOpenEvent}
+                          buildHref={buildHref}
+                        />
+                      );
+                  }
+                })}
               </div>
             </section>
           )}

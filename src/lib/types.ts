@@ -1,7 +1,7 @@
 export type OrgType = 'fraternity' | 'sorority' | 'club' | 'student_org';
 export type OrgRole = 'exec' | 'member' | 'friend';
 export type EventVisibility = 'members_only' | 'friends_and_members' | 'open';
-export type RSVPStatus = 'going' | 'waitlisted' | 'requested' | 'declined' | 'none';
+export type RSVPStatus = 'going' | 'maybe' | 'waitlisted' | 'requested' | 'declined' | 'none';
 export type EventTag =
   | 'darty'
   | 'formal'

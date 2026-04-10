@@ -12,6 +12,10 @@ function RSVPBadge({ status }: { status: RSVPStatus }) {
       className: 'bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 text-emerald-400',
       label: 'going \u2713',
     },
+    maybe: {
+      className: 'bg-neon-cyan/15 text-neon-cyan',
+      label: 'maybe \ud83e\udd14',
+    },
     waitlisted: {
       className: 'bg-amber-500/15 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.15)]',
       label: 'waitlisted',

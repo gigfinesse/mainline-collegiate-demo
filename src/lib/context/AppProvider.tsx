@@ -41,6 +41,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [notifications, setNotifications] = useState<Notification[]>(() =>
     allNotifications.filter((n) => n.userId === currentUser?.id),
   );
+  const [dismissedEventIds, setDismissedEventIds] = useState<Set<string>>(
+    new Set(),
+  );
 
   const unreadCount = useMemo(
     () => notifications.filter((n) => !n.read).length,
@@ -68,6 +71,52 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             eventId,
             userId: currentUser.id,
             status: autoApproved ? 'going' : 'requested',
+            respondedAt: new Date().toISOString(),
+          },
+        ];
+      });
+    },
+    [currentUser],
+  );
+
+  const maybeEvent = useCallback(
+    (eventId: string) => {
+      if (!currentUser) return;
+
+      // Remove any existing RSVP, then add 'maybe'
+      setRsvps((prev) => {
+        const filtered = prev.filter(
+          (r) => !(r.eventId === eventId && r.userId === currentUser.id),
+        );
+        return [
+          ...filtered,
+          {
+            eventId,
+            userId: currentUser.id,
+            status: 'maybe' as const,
+            respondedAt: new Date().toISOString(),
+          },
+        ];
+      });
+    },
+    [currentUser],
+  );
+
+  const declineEvent = useCallback(
+    (eventId: string) => {
+      if (!currentUser) return;
+
+      // Remove any existing RSVP, then add 'declined'
+      setRsvps((prev) => {
+        const filtered = prev.filter(
+          (r) => !(r.eventId === eventId && r.userId === currentUser.id),
+        );
+        return [
+          ...filtered,
+          {
+            eventId,
+            userId: currentUser.id,
+            status: 'declined' as const,
             respondedAt: new Date().toISOString(),
           },
         ];
@@ -214,6 +263,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
 
+  const dismissEvent = useCallback((eventId: string) => {
+    setDismissedEventIds((prev) => {
+      const next = new Set(prev);
+      next.add(eventId);
+      return next;
+    });
+  }, []);
+
   const value = useMemo(
     () => ({
       currentUser,
@@ -224,7 +281,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       events,
       notifications,
       unreadCount,
+      dismissedEventIds,
       rsvpToEvent,
+      maybeEvent,
+      declineEvent,
       cancelRSVP,
       addComment,
       addReaction,
@@ -235,6 +295,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updateEvent,
       markNotificationRead,
       markAllNotificationsRead,
+      dismissEvent,
     }),
     [
       currentUser,
@@ -245,7 +306,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       events,
       notifications,
       unreadCount,
+      dismissedEventIds,
       rsvpToEvent,
+      maybeEvent,
+      declineEvent,
       cancelRSVP,
       addComment,
       addReaction,
@@ -256,6 +320,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updateEvent,
       markNotificationRead,
       markAllNotificationsRead,
+      dismissEvent,
     ],
   );
 

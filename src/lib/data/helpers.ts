@@ -215,7 +215,7 @@ export function getHomeFeedForUser(
       .filter(
         (r) =>
           r.eventId === event.id &&
-          r.status === 'going' &&
+          (r.status === 'going' || r.status === 'maybe') &&
           friendIds.has(r.userId),
       )
       .map((r) => friends.find((f) => f.id === r.userId))
@@ -340,6 +340,7 @@ export function getUpcomingEventsForUser(
         (r) =>
           r.userId === userId &&
           (r.status === 'going' ||
+            r.status === 'maybe' ||
             r.status === 'waitlisted' ||
             r.status === 'requested'),
       )

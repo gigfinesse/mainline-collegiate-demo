@@ -19,6 +19,7 @@ export function GuestList({ event }: GuestListProps) {
 
   const allRsvps = getRSVPsForEvent(event.id, rsvps);
   const going = allRsvps.filter((r) => r.rsvp.status === 'going');
+  const maybe = allRsvps.filter((r) => r.rsvp.status === 'maybe');
   const waitlisted = allRsvps.filter((r) => r.rsvp.status === 'waitlisted');
   const requested = allRsvps.filter((r) => r.rsvp.status === 'requested');
 
@@ -53,6 +54,12 @@ export function GuestList({ event }: GuestListProps) {
           <span className="text-sm text-gray-400">
             <span className="font-semibold text-white">{going.length}</span> going
           </span>
+          {maybe.length > 0 && (
+            <span className="text-sm text-gray-400">
+              <span className="font-semibold text-neon-cyan">{maybe.length}</span>{' '}
+              maybe
+            </span>
+          )}
           {waitlisted.length > 0 && (
             <span className="text-sm text-gray-400">
               <span className="font-semibold text-yellow-400">{waitlisted.length}</span>{' '}
@@ -153,6 +160,19 @@ export function GuestList({ event }: GuestListProps) {
                   />
                 )}
 
+                {/* Maybe */}
+                {maybe.length > 0 && (
+                  <GuestGroup
+                    label="Maybe"
+                    count={maybe.length}
+                    color="text-neon-cyan"
+                    guests={maybe}
+                    friendIds={friendIds}
+                    onAvatarClick={openProfile}
+                    dimmed
+                  />
+                )}
+
                 {/* Waitlisted */}
                 {waitlisted.length > 0 && (
                   <GuestGroup
@@ -192,6 +212,7 @@ function GuestGroup({
   guests,
   friendIds,
   onAvatarClick,
+  dimmed = false,
 }: {
   label: string;
   count: number;
@@ -199,6 +220,7 @@ function GuestGroup({
   guests: { user: { id: string; firstName: string; lastName: string; avatarUrl: string } }[];
   friendIds: Set<string>;
   onAvatarClick: (userId: string) => void;
+  dimmed?: boolean;
 }) {
   return (
     <div>
@@ -213,7 +235,7 @@ function GuestGroup({
               key={user.id}
               type="button"
               onClick={() => onAvatarClick(user.id)}
-              className="w-full flex items-center gap-3 text-left"
+              className={`w-full flex items-center gap-3 text-left ${dimmed ? 'opacity-70' : ''}`}
             >
               <div
                 className={`rounded-full p-[2px] ${
@@ -229,7 +251,7 @@ function GuestGroup({
                   className="h-8 w-8 rounded-full bg-dark-700"
                 />
               </div>
-              <span className="text-sm text-white">
+              <span className={`text-sm ${dimmed ? 'text-gray-400' : 'text-white'}`}>
                 {user.firstName} {user.lastName}
               </span>
               {isFriend && (

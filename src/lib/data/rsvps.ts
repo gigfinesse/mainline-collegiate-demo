@@ -126,6 +126,13 @@ export const rsvps: RSVP[] = [
   { eventId: 'evt-15', userId: 'user-chloe', status: 'going', respondedAt: at(0) },
   { eventId: 'evt-15', userId: 'user-james', status: 'going', respondedAt: at(0) },
 
+  // ── Maybe entries ──
+  { eventId: 'evt-3', userId: 'user-sophia', status: 'maybe', respondedAt: at(1) },
+  { eventId: 'evt-3', userId: 'user-charlotte', status: 'maybe', respondedAt: at(1) },
+  { eventId: 'evt-7', userId: 'user-mia', status: 'maybe', respondedAt: at(1) },
+  { eventId: 'evt-7', userId: 'user-daniel', status: 'maybe', respondedAt: at(0) },
+  { eventId: 'evt-13', userId: 'user-ethan', status: 'maybe', respondedAt: at(0) },
+
   // Waitlisted entries for capacity-limited events
   { eventId: 'evt-6', userId: 'user-mia', status: 'waitlisted', respondedAt: at(0) },
   { eventId: 'evt-8', userId: 'user-mason', status: 'waitlisted', respondedAt: at(0) },

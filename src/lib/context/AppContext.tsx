@@ -22,9 +22,12 @@ export interface AppContextValue {
   events: Event[];
   notifications: Notification[];
   unreadCount: number;
+  dismissedEventIds: Set<string>;
 
   // Actions
   rsvpToEvent: (eventId: string) => void;
+  maybeEvent: (eventId: string) => void;
+  declineEvent: (eventId: string) => void;
   cancelRSVP: (eventId: string) => void;
   addComment: (eventId: string, text: string) => void;
   addReaction: (commentId: string, emoji: string) => void;
@@ -35,6 +38,7 @@ export interface AppContextValue {
   updateEvent: (eventId: string, updates: Partial<Event>) => void;
   markNotificationRead: (notificationId: string) => void;
   markAllNotificationsRead: () => void;
+  dismissEvent: (eventId: string) => void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);
