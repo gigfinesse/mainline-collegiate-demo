@@ -9,6 +9,7 @@ import type {
   FriendRequest,
   Friendship,
   Event,
+  Notification,
 } from '@/lib/types';
 import { getUserBySlug } from '@/lib/data/helpers';
 import {
@@ -17,6 +18,7 @@ import {
   friendRequests as initialFriendRequests,
   friendships as initialFriendships,
   events as initialEvents,
+  notifications as allNotifications,
 } from '@/lib/data';
 import { canUserRSVP, getEventById } from '@/lib/data/helpers';
 
@@ -36,6 +38,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     ...initialFriendships,
   ]);
   const [events, setEvents] = useState<Event[]>(() => [...initialEvents]);
+  const [notifications, setNotifications] = useState<Notification[]>(() =>
+    allNotifications.filter((n) => n.userId === currentUser?.id),
+  );
+
+  const unreadCount = useMemo(
+    () => notifications.filter((n) => !n.read).length,
+    [notifications],
+  );
 
   const rsvpToEvent = useCallback(
     (eventId: string) => {
@@ -189,6 +199,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     [],
   );
 
+  const markNotificationRead = useCallback(
+    (notificationId: string) => {
+      setNotifications((prev) =>
+        prev.map((n) =>
+          n.id === notificationId ? { ...n, read: true } : n,
+        ),
+      );
+    },
+    [],
+  );
+
+  const markAllNotificationsRead = useCallback(() => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  }, []);
+
   const value = useMemo(
     () => ({
       currentUser,
@@ -197,6 +222,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       friendRequests,
       friendships,
       events,
+      notifications,
+      unreadCount,
       rsvpToEvent,
       cancelRSVP,
       addComment,
@@ -206,6 +233,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       declineFriendRequest,
       createEvent,
       updateEvent,
+      markNotificationRead,
+      markAllNotificationsRead,
     }),
     [
       currentUser,
@@ -214,6 +243,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       friendRequests,
       friendships,
       events,
+      notifications,
+      unreadCount,
       rsvpToEvent,
       cancelRSVP,
       addComment,
@@ -223,6 +254,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       declineFriendRequest,
       createEvent,
       updateEvent,
+      markNotificationRead,
+      markAllNotificationsRead,
     ],
   );
 

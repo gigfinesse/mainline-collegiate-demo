@@ -7,3 +7,4 @@ export { friendRequests } from './friend-requests';
 export { events } from './events';
 export { rsvps } from './rsvps';
 export { comments } from './comments';
+export { notifications } from './notifications';

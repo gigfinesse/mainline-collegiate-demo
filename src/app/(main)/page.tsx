@@ -1,16 +1,19 @@
 'use client';
 
+import Link from 'next/link';
 import { useSearchParams, redirect } from 'next/navigation';
 import { useApp } from '@/lib/context/AppContext';
-import { getHomeFeedForUser } from '@/lib/data/helpers';
+import { getHomeFeedForUser, getUnRsvpdOrgEventsForUser } from '@/lib/data/helpers';
 import { FriendActivityCompactCard } from '@/components/feed/FriendActivityCompactCard';
 import { OrgEventCard } from '@/components/feed/OrgEventCard';
 import { OpenEventCard } from '@/components/feed/OpenEventCard';
+import { OrgEventNudgeCard } from '@/components/feed/OrgEventNudgeCard';
 import { SparklesIcon } from '@heroicons/react/24/solid';
+import { BellIcon } from '@heroicons/react/24/outline';
 import type { FeedItemFriendActivity, FeedItemOrgEvent, FeedItemOpenEvent } from '@/lib/types';
 
 export default function HomePage() {
-  const { currentUser, rsvps } = useApp();
+  const { currentUser, rsvps, unreadCount } = useApp();
   const searchParams = useSearchParams();
   const userParam = searchParams.get('user');
 
@@ -31,6 +34,7 @@ export default function HomePage() {
   }
 
   const feedItems = getHomeFeedForUser(currentUser.id, rsvps);
+  const unRsvpdOrgEvents = getUnRsvpdOrgEventsForUser(currentUser.id, rsvps);
 
   // Separate feed items by type
   const friendActivityItems = feedItems.filter(
@@ -46,15 +50,24 @@ export default function HomePage() {
   const hasAnyItems =
     friendActivityItems.length > 0 ||
     orgEventItems.length > 0 ||
-    openEventItems.length > 0;
+    openEventItems.length > 0 ||
+    unRsvpdOrgEvents.length > 0;
 
   return (
     <div className="pb-4">
-      {/* Wordmark */}
-      <div className="px-4 pt-6 mb-5">
+      {/* Wordmark + Notification Bell */}
+      <div className="px-4 pt-6 mb-5 flex items-center justify-between">
         <span className="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-orange bg-clip-text text-transparent text-sm font-black tracking-[0.2em]">
           MAINLINE
         </span>
+        <Link href={buildHref('/notifications')} className="relative p-1">
+          <BellIcon className="w-6 h-6 text-gray-400 hover:text-white transition-colors" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-neon-pink text-white text-[10px] font-bold px-1">
+              {unreadCount}
+            </span>
+          )}
+        </Link>
       </div>
 
       {!hasAnyItems ? (
@@ -85,7 +98,27 @@ export default function HomePage() {
             </section>
           )}
 
-          {/* Section 2: From Your Orgs */}
+          {/* Section 2: Don't Miss - Un-RSVP'd org events */}
+          {unRsvpdOrgEvents.length > 0 && (
+            <section>
+              <h2 className="px-4 mb-3 text-base font-bold text-white">
+                don&apos;t miss 👀
+              </h2>
+              <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+                {unRsvpdOrgEvents.map(({ event, org }) => (
+                  <div key={`nudge-${event.id}`} className="flex-shrink-0 w-[180px]">
+                    <OrgEventNudgeCard
+                      event={event}
+                      org={org}
+                      buildHref={buildHref}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Section 3: From Your Orgs */}
           {orgEventItems.length > 0 && (
             <section className="px-4">
               <h2 className="mb-3 text-base font-bold text-white">
@@ -103,7 +136,7 @@ export default function HomePage() {
             </section>
           )}
 
-          {/* Section 3: Happening at MSU */}
+          {/* Section 4: Happening at MSU */}
           {openEventItems.length > 0 && (
             <section className="px-4">
               <h2 className="mb-3 text-base font-bold text-white">

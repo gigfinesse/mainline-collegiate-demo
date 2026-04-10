@@ -110,6 +110,29 @@ export interface Reaction {
   userId: string;
 }
 
+// Notification types
+export type NotificationType =
+  | 'event_reminder'      // "Neon Nights is tonight!"
+  | 'capacity_alert'      // "Spring Formal is 85% full"
+  | 'org_announcement'    // "ΘΔ posted: dress code is black tie"
+  | 'friend_rsvp'         // "Jake RSVP'd to Neon Nights"
+  | 'friend_accepted'     // "Charlotte accepted your friend request"
+  | 'event_update';       // "Neon Nights location changed"
+
+export interface Notification {
+  id: string;
+  type: NotificationType;
+  userId: string;          // who this notification is for
+  title: string;
+  body: string;
+  emoji: string;           // leading emoji for the notification
+  eventId?: string;        // optional link to event
+  orgId?: string;          // optional link to org
+  fromUserId?: string;     // optional user who triggered it
+  read: boolean;
+  createdAt: string;       // ISO datetime
+}
+
 // Feed item types for the home feed
 export type FeedItem =
   | FeedItemFriendActivity

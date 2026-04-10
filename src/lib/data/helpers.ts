@@ -281,6 +281,52 @@ export function getHomeFeedForUser(
   return feedItems;
 }
 
+// ── Un-RSVP'd org events helper ──
+
+export function getUnRsvpdOrgEventsForUser(
+  userId: string,
+  rsvpList: RSVP[] = allRsvps,
+): { event: Event; org: Org }[] {
+  const now = new Date('2026-04-10T00:00:00');
+
+  // Get orgs the user belongs to (exec or member, NOT friend)
+  const userOrgIds = new Set(
+    memberships
+      .filter(
+        (m) =>
+          m.userId === userId && (m.role === 'exec' || m.role === 'member'),
+      )
+      .map((m) => m.orgId),
+  );
+
+  // Get events the user has already RSVP'd to (any status)
+  const rsvpdEventIds = new Set(
+    rsvpList.filter((r) => r.userId === userId).map((r) => r.eventId),
+  );
+
+  // Get upcoming events from those orgs that the user can see but hasn't RSVP'd to
+  const results: { event: Event; org: Org }[] = [];
+
+  for (const event of events) {
+    if (new Date(event.date) < now) continue;
+    if (!userOrgIds.has(event.orgId)) continue;
+    if (rsvpdEventIds.has(event.id)) continue;
+    if (!canUserSeeEvent(userId, event)) continue;
+
+    const org = getOrgById(event.orgId);
+    if (!org) continue;
+
+    results.push({ event, org });
+  }
+
+  // Sort by date ascending (soonest first)
+  results.sort(
+    (a, b) => new Date(a.event.date).getTime() - new Date(b.event.date).getTime(),
+  );
+
+  return results;
+}
+
 // ── User event helpers ──
 
 export function getUpcomingEventsForUser(

@@ -8,6 +8,7 @@ import type {
   FriendRequest,
   Friendship,
   Event,
+  Notification,
 } from '@/lib/types';
 
 export interface AppContextValue {
@@ -19,6 +20,8 @@ export interface AppContextValue {
   friendRequests: FriendRequest[];
   friendships: Friendship[];
   events: Event[];
+  notifications: Notification[];
+  unreadCount: number;
 
   // Actions
   rsvpToEvent: (eventId: string) => void;
@@ -30,6 +33,8 @@ export interface AppContextValue {
   declineFriendRequest: (requestId: string) => void;
   createEvent: (event: Event) => void;
   updateEvent: (eventId: string, updates: Partial<Event>) => void;
+  markNotificationRead: (notificationId: string) => void;
+  markAllNotificationsRead: () => void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);
