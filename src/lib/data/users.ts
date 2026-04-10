@@ -1,13 +1,5 @@
 import type { User } from '@/lib/types';
 
-function menAvatar(id: number): string {
-  return `https://randomuser.me/api/portraits/men/${id}.jpg`;
-}
-
-function womenAvatar(id: number): string {
-  return `https://randomuser.me/api/portraits/women/${id}.jpg`;
-}
-
 export const users: User[] = [
   // ── Demo Users ──
   {
@@ -17,7 +9,7 @@ export const users: User[] = [
     lastName: 'Thompson',
     email: 'marcus.thompson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(32),
+    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face',
     bio: 'KSP social chair. Rally member. If you know, you know.',
   },
   {
@@ -27,7 +19,7 @@ export const users: User[] = [
     lastName: 'Chen',
     email: 'sarah.chen@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(44),
+    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
     bio: 'TD president & event queen. Philanthropy is my love language.',
   },
   {
@@ -37,7 +29,7 @@ export const users: User[] = [
     lastName: 'Rivera',
     email: 'jake.rivera@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(75),
+    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
     bio: 'KSP brother. Always down for a good time.',
   },
   {
@@ -47,7 +39,7 @@ export const users: User[] = [
     lastName: 'Patel',
     email: 'priya.patel@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(63),
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
     bio: 'The Collective creative director. Art, music, vibes.',
   },
   {
@@ -57,7 +49,7 @@ export const users: User[] = [
     lastName: 'Brooks',
     email: 'tyler.brooks@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(86),
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
     bio: 'Just a guy at MSU trying to find the move.',
   },
 
@@ -69,7 +61,7 @@ export const users: User[] = [
     lastName: 'Williams',
     email: 'emma.williams@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(33),
+    avatarUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
     bio: 'TD social chair & party planner extraordinaire.',
   },
   {
@@ -79,7 +71,7 @@ export const users: User[] = [
     lastName: 'Johnson',
     email: 'liam.johnson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(22),
+    avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop&crop=face',
     bio: 'KSP rush chair. Come through.',
   },
   {
@@ -89,7 +81,7 @@ export const users: User[] = [
     lastName: 'Davis',
     email: 'olivia.davis@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(17),
+    avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-noah',
@@ -98,7 +90,7 @@ export const users: User[] = [
     lastName: 'Martinez',
     email: 'noah.martinez@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(45),
+    avatarUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-ava',
@@ -107,7 +99,7 @@ export const users: User[] = [
     lastName: 'Garcia',
     email: 'ava.garcia@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(28),
+    avatarUrl: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=200&fit=crop&crop=face',
     bio: 'Rally hype girl. Game day is my personality.',
   },
   {
@@ -117,7 +109,7 @@ export const users: User[] = [
     lastName: 'Brown',
     email: 'ethan.brown@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(55),
+    avatarUrl: 'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-sophia',
@@ -126,7 +118,7 @@ export const users: User[] = [
     lastName: 'Wilson',
     email: 'sophia.wilson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(71),
+    avatarUrl: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop&crop=face',
     bio: 'Phi Lambda sweetheart. TD sister.',
   },
   {
@@ -136,7 +128,7 @@ export const users: User[] = [
     lastName: 'Lee',
     email: 'mason.lee@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(15),
+    avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-isabella',
@@ -145,7 +137,7 @@ export const users: User[] = [
     lastName: 'Anderson',
     email: 'isabella.anderson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(52),
+    avatarUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&crop=face',
     bio: 'The Collective DJ. Catch me at the underground.',
   },
   {
@@ -155,7 +147,7 @@ export const users: User[] = [
     lastName: 'Thomas',
     email: 'aiden.thomas@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(67),
+    avatarUrl: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-mia',
@@ -164,7 +156,7 @@ export const users: User[] = [
     lastName: 'Taylor',
     email: 'mia.taylor@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(39),
+    avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-lucas',
@@ -173,7 +165,7 @@ export const users: User[] = [
     lastName: 'Jackson',
     email: 'lucas.jackson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(11),
+    avatarUrl: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-charlotte',
@@ -182,7 +174,7 @@ export const users: User[] = [
     lastName: 'White',
     email: 'charlotte.white@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(8),
+    avatarUrl: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-logan',
@@ -191,7 +183,7 @@ export const users: User[] = [
     lastName: 'Harris',
     email: 'logan.harris@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(41),
+    avatarUrl: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=200&h=200&fit=crop&crop=face',
     bio: 'Phi Lambda VP. Exclusive vibes only.',
   },
   {
@@ -201,7 +193,7 @@ export const users: User[] = [
     lastName: 'Clark',
     email: 'amelia.clark@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(23),
+    avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-james',
@@ -210,7 +202,7 @@ export const users: User[] = [
     lastName: 'Lewis',
     email: 'james.lewis@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(59),
+    avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-harper',
@@ -219,7 +211,7 @@ export const users: User[] = [
     lastName: 'Robinson',
     email: 'harper.robinson@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(14),
+    avatarUrl: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-ben',
@@ -228,7 +220,7 @@ export const users: User[] = [
     lastName: 'Walker',
     email: 'ben.walker@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(29),
+    avatarUrl: 'https://images.unsplash.com/photo-1528892952291-009c663ce843?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-chloe',
@@ -237,7 +229,7 @@ export const users: User[] = [
     lastName: 'Hall',
     email: 'chloe.hall@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: womenAvatar(46),
+    avatarUrl: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&h=200&fit=crop&crop=face',
   },
   {
     id: 'user-daniel',
@@ -246,6 +238,6 @@ export const users: User[] = [
     lastName: 'Young',
     email: 'daniel.young@mainlinestate.edu',
     schoolId: 'msu',
-    avatarUrl: menAvatar(73),
+    avatarUrl: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop&crop=face',
   },
 ];

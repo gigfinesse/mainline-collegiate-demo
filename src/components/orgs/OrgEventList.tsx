@@ -4,23 +4,21 @@ import Link from 'next/link';
 import { getOrgById, getUserRSVPForEvent, canUserSeeEvent, formatTime } from '@/lib/data/helpers';
 import type { Event, RSVP, RSVPStatus } from '@/lib/types';
 import { CalendarIcon } from '@heroicons/react/24/outline';
+import { getTagColor } from '@/lib/tagColors';
 
 function RSVPBadge({ status }: { status: RSVPStatus }) {
-  const config: Record<string, { bg: string; text: string; label: string }> = {
+  const config: Record<string, { className: string; label: string }> = {
     going: {
-      bg: 'bg-emerald-500/15',
-      text: 'text-emerald-400',
-      label: 'Going',
+      className: 'bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 text-emerald-400',
+      label: 'going \u2713',
     },
     waitlisted: {
-      bg: 'bg-yellow-500/15',
-      text: 'text-yellow-400',
-      label: 'Waitlisted',
+      className: 'bg-amber-500/15 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.15)]',
+      label: 'waitlisted',
     },
     requested: {
-      bg: 'bg-neon-orange/15',
-      text: 'text-neon-orange',
-      label: 'Requested',
+      className: 'bg-neon-orange/15 text-neon-orange',
+      label: 'requested \ud83e\udd1e',
     },
   };
 
@@ -29,7 +27,7 @@ function RSVPBadge({ status }: { status: RSVPStatus }) {
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${c.bg} ${c.text}`}
+      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ${c.className}`}
     >
       {c.label}
     </span>
@@ -196,7 +194,7 @@ function EventRow({
             {event.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] font-medium text-gray-500 bg-dark-700 px-1.5 py-0.5 rounded"
+                className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${getTagColor(tag)}`}
               >
                 {tag}
               </span>

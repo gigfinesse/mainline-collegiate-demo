@@ -52,17 +52,17 @@ export default function HomePage() {
     <div className="pb-4">
       {/* Wordmark */}
       <div className="px-4 pt-6 mb-5">
-        <div className="text-xs font-bold tracking-[0.3em] text-neon-purple uppercase">
-          Mainline
-        </div>
+        <span className="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-orange bg-clip-text text-transparent text-sm font-black tracking-[0.2em]">
+          MAINLINE
+        </span>
       </div>
 
       {!hasAnyItems ? (
         <div className="flex flex-col items-center justify-center py-16 text-center px-4">
           <SparklesIcon className="w-10 h-10 text-neon-purple/40 mb-3" />
-          <p className="text-gray-400 font-medium">Nothing in your feed yet</p>
+          <p className="text-gray-400 font-medium">it&apos;s quiet... too quiet 👀</p>
           <p className="text-xs text-gray-600 mt-1">
-            Join some orgs and add friends to see what&apos;s up
+            join some orgs and add friends to get in the loop
           </p>
         </div>
       ) : (
@@ -70,8 +70,8 @@ export default function HomePage() {
           {/* Section 1: Your Friends Are Going */}
           {friendActivityItems.length > 0 && (
             <section>
-              <h2 className="px-4 mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
-                Your Friends Are Going
+              <h2 className="px-4 mb-3 text-base font-bold text-white">
+                friends are pulling up 🔥
               </h2>
               <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
                 {friendActivityItems.map((item) => (
@@ -88,8 +88,8 @@ export default function HomePage() {
           {/* Section 2: From Your Orgs */}
           {orgEventItems.length > 0 && (
             <section className="px-4">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
-                From Your Orgs
+              <h2 className="mb-3 text-base font-bold text-white">
+                from your orgs ✨
               </h2>
               <div className="space-y-3">
                 {orgEventItems.map((item) => (
@@ -106,8 +106,8 @@ export default function HomePage() {
           {/* Section 3: Happening at MSU */}
           {openEventItems.length > 0 && (
             <section className="px-4">
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
-                Happening at MSU
+              <h2 className="mb-3 text-base font-bold text-white">
+                happening at MSU 🎉
               </h2>
               <div className="space-y-3">
                 {openEventItems.map((item) => (

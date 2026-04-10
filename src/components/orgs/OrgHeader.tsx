@@ -9,22 +9,22 @@ function OrgTypeBadge({ type }: { type: Org['type'] }) {
     fraternity: {
       bg: 'bg-neon-purple/15',
       text: 'text-neon-purple',
-      label: 'Fraternity',
+      label: '🏛 Fraternity',
     },
     sorority: {
       bg: 'bg-neon-pink/15',
       text: 'text-neon-pink',
-      label: 'Sorority',
+      label: '💜 Sorority',
     },
     club: {
       bg: 'bg-neon-cyan/15',
       text: 'text-neon-cyan',
-      label: 'Club',
+      label: '🎨 Club',
     },
     student_org: {
       bg: 'bg-neon-orange/15',
       text: 'text-neon-orange',
-      label: 'Student Org',
+      label: '⚡ Student Org',
     },
   };
 

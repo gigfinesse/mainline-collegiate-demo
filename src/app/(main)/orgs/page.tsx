@@ -25,10 +25,10 @@ function RoleBadge({ role }: { role: OrgRole }) {
 
 function OrgTypeBadge({ type }: { type: OrgType }) {
   const config: Record<OrgType, { text: string; label: string }> = {
-    fraternity: { text: 'text-neon-purple/80', label: 'Fraternity' },
-    sorority: { text: 'text-neon-pink/80', label: 'Sorority' },
-    club: { text: 'text-neon-cyan/80', label: 'Club' },
-    student_org: { text: 'text-neon-orange/80', label: 'Student Org' },
+    fraternity: { text: 'text-neon-purple/80', label: '🏛 Fraternity' },
+    sorority: { text: 'text-neon-pink/80', label: '💜 Sorority' },
+    club: { text: 'text-neon-cyan/80', label: '🎨 Club' },
+    student_org: { text: 'text-neon-orange/80', label: '⚡ Student Org' },
   };
   const c = config[type];
   return (
@@ -73,10 +73,10 @@ export default function MyOrgsPage() {
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <UserGroupIcon className="w-12 h-12 text-gray-600 mb-4" />
           <p className="text-lg font-semibold text-gray-400">
-            You&apos;re not in any orgs yet
+            no squads yet 😭
           </p>
           <p className="text-sm text-gray-600 mt-2 max-w-[260px]">
-            Ask a friend for an invite or apply to start your own org on campus
+            get an invite from a friend or start your own org on campus
           </p>
         </div>
       ) : (

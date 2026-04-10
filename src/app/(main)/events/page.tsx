@@ -92,13 +92,13 @@ export default function MyEventsPage() {
           <CalendarDaysIcon className="w-10 h-10 text-neon-purple/30 mb-3" />
           <p className="text-gray-400 font-medium">
             {activeTab === 'upcoming'
-              ? 'No upcoming events'
-              : 'No past events'}
+              ? 'nothing on the calendar... yet 📅'
+              : 'no memories here yet 🫠'}
           </p>
           <p className="text-xs text-gray-600 mt-1">
             {activeTab === 'upcoming'
-              ? "Discover what's happening on the Home feed!"
-              : 'Events you attend will show up here.'}
+              ? 'check the home feed and find your next move'
+              : 'events you hit up will show up here'}
           </p>
         </div>
       ) : (

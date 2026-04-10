@@ -9,7 +9,7 @@ const demoUsers = [
     role: 'Exec @ Kappa Sigma Pi',
     description: 'Social chair. Creates events, manages members. The exec experience.',
     gradient: 'linear-gradient(135deg, #a855f7, #ec4899)',
-    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Marcus',
+    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face',
   },
   {
     slug: 'sarah',
@@ -17,7 +17,7 @@ const demoUsers = [
     role: 'Exec @ Theta Delta',
     description: 'Sorority president. Sees TD events, is a friend of KSP.',
     gradient: 'linear-gradient(135deg, #ec4899, #f97316)',
-    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Sarah',
+    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
   },
   {
     slug: 'jake',
@@ -25,7 +25,7 @@ const demoUsers = [
     role: 'Member @ Kappa Sigma Pi',
     description: 'Brother at KSP. Can RSVP and invite friends, but can\'t create events.',
     gradient: 'linear-gradient(135deg, #22d3ee, #a855f7)',
-    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Jake',
+    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
   },
   {
     slug: 'priya',
@@ -33,7 +33,7 @@ const demoUsers = [
     role: 'Member @ The Collective',
     description: 'Creative arts club member. Friend of Theta Delta. Cross-org view.',
     gradient: 'linear-gradient(135deg, #6366f1, #22d3ee)',
-    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Priya',
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
   },
   {
     slug: 'tyler',
@@ -41,7 +41,7 @@ const demoUsers = [
     role: 'No org — just a student',
     description: 'The rando experience. Can only see open events. No org access.',
     gradient: 'linear-gradient(135deg, #f97316, #22d3ee)',
-    avatarUrl: 'https://api.dicebear.com/9.x/notionists/svg?seed=Tyler',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
   },
 ];
 

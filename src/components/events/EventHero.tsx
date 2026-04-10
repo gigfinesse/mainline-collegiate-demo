@@ -2,6 +2,7 @@
 
 import { MapPinIcon, ClockIcon } from '@heroicons/react/24/outline';
 import type { Event, Org } from '@/lib/types';
+import { getTagColor } from '@/lib/tagColors';
 
 interface EventHeroProps {
   event: Event;
@@ -31,18 +32,13 @@ const orgTypeBadgeColors: Record<string, string> = {
   student_org: 'bg-neon-orange/20 text-neon-orange',
 };
 
-const tagColors: Record<string, string> = {
-  darty: 'bg-neon-orange/20 text-neon-orange border-neon-orange/30',
-  formal: 'bg-neon-indigo/20 text-neon-indigo border-neon-indigo/30',
-  mixer: 'bg-neon-pink/20 text-neon-pink border-neon-pink/30',
-  rush: 'bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30',
-  philanthropy: 'bg-neon-purple/20 text-neon-purple border-neon-purple/30',
-  tailgate: 'bg-neon-orange/20 text-neon-orange border-neon-orange/30',
-  party: 'bg-neon-pink/20 text-neon-pink border-neon-pink/30',
-  concert: 'bg-neon-cyan/20 text-neon-cyan border-neon-cyan/30',
-  pregame: 'bg-neon-indigo/20 text-neon-indigo border-neon-indigo/30',
-  social: 'bg-neon-purple/20 text-neon-purple border-neon-purple/30',
+const orgTypeEmoji: Record<string, string> = {
+  fraternity: '🏛',
+  sorority: '💜',
+  club: '🎨',
+  student_org: '⚡',
 };
+
 
 export function EventHero({ event, org }: EventHeroProps) {
   const orgTypeLabel = org.type.replace('_', ' ');
@@ -103,7 +99,7 @@ export function EventHero({ event, org }: EventHeroProps) {
           <span
             className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${badgeColor}`}
           >
-            {orgTypeLabel}
+            {orgTypeEmoji[org.type] || ''} {orgTypeLabel}
           </span>
         </div>
 
@@ -127,7 +123,7 @@ export function EventHero({ event, org }: EventHeroProps) {
           {event.tags.map((tag) => (
             <span
               key={tag}
-              className={`rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${tagColors[tag] || 'bg-dark-600 text-gray-300 border-dark-600'}`}
+              className={`rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${getTagColor(tag)}`}
             >
               {tag}
             </span>

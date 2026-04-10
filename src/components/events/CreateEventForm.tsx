@@ -29,29 +29,29 @@ const TAG_OPTIONS: EventTag[] = [
 ];
 
 const tagDisplayColors: Record<string, string> = {
-  darty: 'border-neon-orange/50 text-neon-orange bg-neon-orange/10',
-  formal: 'border-neon-indigo/50 text-neon-indigo bg-neon-indigo/10',
-  mixer: 'border-neon-pink/50 text-neon-pink bg-neon-pink/10',
-  rush: 'border-neon-cyan/50 text-neon-cyan bg-neon-cyan/10',
-  philanthropy: 'border-neon-purple/50 text-neon-purple bg-neon-purple/10',
-  tailgate: 'border-neon-orange/50 text-neon-orange bg-neon-orange/10',
-  party: 'border-neon-pink/50 text-neon-pink bg-neon-pink/10',
-  concert: 'border-neon-cyan/50 text-neon-cyan bg-neon-cyan/10',
-  pregame: 'border-neon-indigo/50 text-neon-indigo bg-neon-indigo/10',
-  social: 'border-neon-purple/50 text-neon-purple bg-neon-purple/10',
+  darty: 'border-amber-500/50 text-amber-400 bg-amber-500/10',
+  formal: 'border-violet-500/50 text-violet-400 bg-violet-500/10',
+  mixer: 'border-pink-500/50 text-pink-400 bg-pink-500/10',
+  rush: 'border-emerald-500/50 text-emerald-400 bg-emerald-500/10',
+  philanthropy: 'border-rose-500/50 text-rose-400 bg-rose-500/10',
+  tailgate: 'border-orange-500/50 text-orange-400 bg-orange-500/10',
+  party: 'border-fuchsia-500/50 text-fuchsia-400 bg-fuchsia-500/10',
+  concert: 'border-cyan-500/50 text-cyan-400 bg-cyan-500/10',
+  pregame: 'border-lime-500/50 text-lime-400 bg-lime-500/10',
+  social: 'border-sky-500/50 text-sky-400 bg-sky-500/10',
 };
 
 const tagSelectedColors: Record<string, string> = {
-  darty: 'border-neon-orange text-white bg-neon-orange/30',
-  formal: 'border-neon-indigo text-white bg-neon-indigo/30',
-  mixer: 'border-neon-pink text-white bg-neon-pink/30',
-  rush: 'border-neon-cyan text-white bg-neon-cyan/30',
-  philanthropy: 'border-neon-purple text-white bg-neon-purple/30',
-  tailgate: 'border-neon-orange text-white bg-neon-orange/30',
-  party: 'border-neon-pink text-white bg-neon-pink/30',
-  concert: 'border-neon-cyan text-white bg-neon-cyan/30',
-  pregame: 'border-neon-indigo text-white bg-neon-indigo/30',
-  social: 'border-neon-purple text-white bg-neon-purple/30',
+  darty: 'border-amber-500 text-white bg-amber-500/30',
+  formal: 'border-violet-500 text-white bg-violet-500/30',
+  mixer: 'border-pink-500 text-white bg-pink-500/30',
+  rush: 'border-emerald-500 text-white bg-emerald-500/30',
+  philanthropy: 'border-rose-500 text-white bg-rose-500/30',
+  tailgate: 'border-orange-500 text-white bg-orange-500/30',
+  party: 'border-fuchsia-500 text-white bg-fuchsia-500/30',
+  concert: 'border-cyan-500 text-white bg-cyan-500/30',
+  pregame: 'border-lime-500 text-white bg-lime-500/30',
+  social: 'border-sky-500 text-white bg-sky-500/30',
 };
 
 const VISIBILITY_OPTIONS: {

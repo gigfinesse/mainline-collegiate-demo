@@ -5,6 +5,7 @@ import { FeedCard } from './FeedCard';
 import { MapPinIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import { formatTime } from '@/lib/data/helpers';
 import type { FeedItemOpenEvent } from '@/lib/types';
+import { getTagColor } from '@/lib/tagColors';
 
 interface OpenEventCardProps {
   item: FeedItemOpenEvent;
@@ -89,7 +90,7 @@ export function OpenEventCard({ item, buildHref }: OpenEventCardProps) {
               {event.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-semibold uppercase tracking-wider text-neon-cyan/80 bg-neon-cyan/10 px-2 py-0.5 rounded-full"
+                  className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${getTagColor(tag)}`}
                 >
                   {tag}
                 </span>

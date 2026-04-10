@@ -75,6 +75,9 @@ export function TabBar() {
               >
                 <Icon className="h-6 w-6" />
                 <span className="text-[10px] font-medium">{tab.label}</span>
+                {active && (
+                  <div className="h-[3px] w-4 rounded-full bg-gradient-to-r from-neon-purple to-neon-pink mt-0.5" />
+                )}
               </Link>
             );
           })}
