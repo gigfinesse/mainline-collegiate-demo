@@ -54,7 +54,10 @@ export default function MyOrgsPage() {
     );
   }
 
-  const userOrgs = getOrgsForUser(currentUser.id);
+  const roleOrder: Record<OrgRole, number> = { exec: 0, member: 1, friend: 2 };
+  const userOrgs = getOrgsForUser(currentUser.id).sort(
+    (a, b) => roleOrder[a.role] - roleOrder[b.role],
+  );
 
   return (
     <div className="px-4 pt-6 pb-4">
@@ -109,14 +112,9 @@ export default function MyOrgsPage() {
                     />
                     <div className="flex-1 min-w-0">
                       {org.greekLetters ? (
-                        <>
-                          <h2 className="text-xl font-black text-white tracking-wide">
-                            {org.greekLetters}
-                          </h2>
-                          <p className="text-xs text-gray-400 truncate -mt-0.5">
-                            {org.name}
-                          </p>
-                        </>
+                        <h2 className="text-base font-bold text-white truncate">
+                          {org.greekLetters} <span className="text-sm font-medium text-gray-400">{org.name}</span>
+                        </h2>
                       ) : (
                         <h2 className="text-base font-bold text-white truncate">
                           {org.name}

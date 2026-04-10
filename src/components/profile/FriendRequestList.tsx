@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { getUserById } from '@/lib/data/helpers';
+import { useUserProfile } from '@/lib/context/UserProfileContext';
 import type { FriendRequest } from '@/lib/types';
 
 interface FriendRequestListProps {
@@ -19,6 +20,7 @@ export function FriendRequestList({
   onAccept,
   onDecline,
 }: FriendRequestListProps) {
+  const { openProfile } = useUserProfile();
   const [celebratingId, setCelebratingId] = useState<string | null>(null);
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
 
@@ -91,18 +93,23 @@ export function FriendRequestList({
                   )}
                 </AnimatePresence>
 
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={fromUser.avatarUrl}
-                  alt={fromUser.firstName}
-                  className="w-10 h-10 rounded-full bg-dark-700 flex-shrink-0"
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">
-                    {fromUser.firstName} {fromUser.lastName}
-                  </p>
-                  <p className="text-xs text-gray-500">wants to be friends</p>
-                </div>
+                <button
+                  onClick={() => openProfile(fromUser.id)}
+                  className="flex items-center gap-3 flex-1 min-w-0 text-left"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={fromUser.avatarUrl}
+                    alt={fromUser.firstName}
+                    className="w-10 h-10 rounded-full bg-dark-700 flex-shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-white truncate">
+                      {fromUser.firstName} {fromUser.lastName}
+                    </p>
+                    <p className="text-xs text-gray-500">tap to view · wants to be friends</p>
+                  </div>
+                </button>
                 <div className="flex items-center gap-1.5 flex-shrink-0">
                   <motion.button
                     whileTap={{ scale: 1.2 }}
