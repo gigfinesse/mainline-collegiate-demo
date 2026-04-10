@@ -9,6 +9,7 @@ export const orgs: Org[] = [
     id: 'org-ksp',
     name: 'Kappa Sigma Pi',
     shortName: 'KSP',
+    greekLetters: 'ΚΣΠ',
     type: 'fraternity',
     schoolId: 'msu',
     description:
@@ -20,6 +21,7 @@ export const orgs: Org[] = [
     id: 'org-td',
     name: 'Theta Delta',
     shortName: 'TD',
+    greekLetters: 'ΘΔ',
     type: 'sorority',
     schoolId: 'msu',
     description:
@@ -53,6 +55,7 @@ export const orgs: Org[] = [
     id: 'org-pl',
     name: 'Phi Lambda',
     shortName: 'PL',
+    greekLetters: 'ΦΛ',
     type: 'fraternity',
     schoolId: 'msu',
     description:

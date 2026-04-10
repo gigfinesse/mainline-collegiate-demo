@@ -36,6 +36,7 @@ export interface Org {
   id: string;
   name: string;
   shortName: string;
+  greekLetters?: string;
   type: OrgType;
   schoolId: string;
   description: string;

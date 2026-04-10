@@ -173,7 +173,11 @@ export function UserProfileModal() {
                           className="w-8 h-8 rounded-full bg-dark-700 flex-shrink-0"
                         />
                         <span className="flex-1 text-sm font-medium text-white truncate">
-                          {org.name}
+                          {org.greekLetters ? (
+                            <><span className="font-bold tracking-wide">{org.greekLetters}</span> <span className="text-gray-400">{org.name}</span></>
+                          ) : (
+                            org.name
+                          )}
                         </span>
                         <OrgRoleBadge role={role} />
                       </div>

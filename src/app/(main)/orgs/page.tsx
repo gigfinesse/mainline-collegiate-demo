@@ -108,9 +108,20 @@ export default function MyOrgsPage() {
                       className="w-11 h-11 rounded-full border-2 border-dark-900 bg-dark-700 flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <h2 className="text-base font-bold text-white truncate">
-                        {org.name}
-                      </h2>
+                      {org.greekLetters ? (
+                        <>
+                          <h2 className="text-xl font-black text-white tracking-wide">
+                            {org.greekLetters}
+                          </h2>
+                          <p className="text-xs text-gray-400 truncate -mt-0.5">
+                            {org.name}
+                          </p>
+                        </>
+                      ) : (
+                        <h2 className="text-base font-bold text-white truncate">
+                          {org.name}
+                        </h2>
+                      )}
                       <div className="flex items-center gap-2 mt-0.5">
                         <OrgTypeBadge type={org.type} />
                         <span className="text-[10px] text-gray-500">

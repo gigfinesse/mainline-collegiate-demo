@@ -107,7 +107,7 @@ export function EventListCard({
             )}
           </div>
           <p className="text-xs text-gray-400 mt-0.5 truncate">
-            {org?.shortName || 'Unknown Org'} / {formattedDate}
+            {org?.greekLetters || org?.shortName || 'Unknown Org'} / {formattedDate}
           </p>
           <div className="flex items-center gap-2 mt-1">
             <span className="text-[11px] text-gray-500">{formatTime(event.startTime)}</span>

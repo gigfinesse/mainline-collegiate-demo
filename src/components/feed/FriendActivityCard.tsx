@@ -80,7 +80,7 @@ export function FriendActivityCard({ item, buildHref }: FriendActivityCardProps)
             <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
               {org && (
                 <>
-                  <span className="text-gray-400">{org.shortName}</span>
+                  <span className="text-gray-400">{org.greekLetters || org.shortName}</span>
                   <span>{'/'}</span>
                 </>
               )}

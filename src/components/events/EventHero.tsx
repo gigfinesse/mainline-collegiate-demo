@@ -95,7 +95,13 @@ export function EventHero({ event, org }: EventHeroProps) {
             alt={org.shortName}
             className="h-6 w-6 rounded-full bg-dark-700"
           />
-          <span className="text-sm font-semibold text-white">{org.name}</span>
+          <span className="text-sm font-semibold text-white">
+            {org.greekLetters ? (
+              <>{org.greekLetters} <span className="text-gray-400 font-normal">{org.name}</span></>
+            ) : (
+              org.name
+            )}
+          </span>
           <span
             className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${badgeColor}`}
           >

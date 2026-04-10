@@ -34,7 +34,7 @@ export function OrgEventCard({ item, buildHref }: OrgEventCardProps) {
 
           <div className="flex-1 min-w-0">
             <p className="text-sm text-gray-300 leading-snug">
-              <span className="font-semibold text-neon-pink">{org.shortName}</span>
+              <span className="font-semibold text-neon-pink">{org.greekLetters || org.shortName}</span>
               {' just posted '}
               <span className="font-bold text-white">{event.title}</span>
             </p>

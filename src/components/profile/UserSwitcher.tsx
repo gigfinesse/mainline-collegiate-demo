@@ -5,9 +5,9 @@ import { getUserBySlug } from '@/lib/data/helpers';
 import { BeakerIcon } from '@heroicons/react/24/outline';
 
 const demoUsers = [
-  { slug: 'marcus', summary: 'Exec @ KSP' },
-  { slug: 'sarah', summary: 'Exec @ TD' },
-  { slug: 'jake', summary: 'Member @ KSP' },
+  { slug: 'marcus', summary: 'Exec @ ΚΣΠ' },
+  { slug: 'sarah', summary: 'Exec @ ΘΔ' },
+  { slug: 'jake', summary: 'Member @ ΚΣΠ' },
   { slug: 'priya', summary: 'Member @ TC' },
   { slug: 'tyler', summary: 'No orgs (rando)' },
 ];

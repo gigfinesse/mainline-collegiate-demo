@@ -73,9 +73,20 @@ export function OrgHeader({ org, userRole, onCreateEvent }: OrgHeaderProps) {
             className="w-20 h-20 rounded-full border-4 border-dark-900 bg-dark-700 flex-shrink-0"
           />
           <div className="flex-1 min-w-0 pb-1">
-            <h1 className="text-xl font-extrabold text-white truncate">
-              {org.name}
-            </h1>
+            {org.greekLetters ? (
+              <>
+                <h1 className="text-3xl font-black text-white tracking-wide">
+                  {org.greekLetters}
+                </h1>
+                <p className="text-sm text-gray-400 -mt-0.5">
+                  {org.name}
+                </p>
+              </>
+            ) : (
+              <h1 className="text-xl font-extrabold text-white truncate">
+                {org.name}
+              </h1>
+            )}
             <div className="flex items-center gap-2 mt-1">
               <OrgTypeBadge type={org.type} />
               <span className="text-xs text-gray-500">

@@ -72,7 +72,7 @@ export function FriendActivityCompactCard({
           <div className="mt-1 flex items-center gap-1.5 text-[10px] text-white/70">
             {org && (
               <>
-                <span className="font-medium text-white/90">{org.shortName}</span>
+                <span className="font-medium text-white/90">{org.greekLetters || org.shortName}</span>
                 <span>/</span>
               </>
             )}

@@ -6,7 +6,7 @@ const demoUsers = [
   {
     slug: 'marcus',
     name: 'Marcus Thompson',
-    role: 'Exec @ Kappa Sigma Pi',
+    role: 'Exec @ ΚΣΠ',
     description: 'Social chair. Creates events, manages members. The exec experience.',
     gradient: 'linear-gradient(135deg, #a855f7, #ec4899)',
     avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face',
@@ -14,7 +14,7 @@ const demoUsers = [
   {
     slug: 'sarah',
     name: 'Sarah Chen',
-    role: 'Exec @ Theta Delta',
+    role: 'Exec @ ΘΔ',
     description: 'Sorority president. Sees TD events, is a friend of KSP.',
     gradient: 'linear-gradient(135deg, #ec4899, #f97316)',
     avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
@@ -22,7 +22,7 @@ const demoUsers = [
   {
     slug: 'jake',
     name: 'Jake Rivera',
-    role: 'Member @ Kappa Sigma Pi',
+    role: 'Member @ ΚΣΠ',
     description: 'Brother at KSP. Can RSVP and invite friends, but can\'t create events.',
     gradient: 'linear-gradient(135deg, #22d3ee, #a855f7)',
     avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',

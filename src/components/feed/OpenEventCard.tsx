@@ -72,7 +72,7 @@ export function OpenEventCard({ item, buildHref }: OpenEventCardProps) {
         <div className="p-4 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-neon-purple">
-              {org.shortName}
+              {org.greekLetters || org.shortName}
             </span>
             <span className="text-xs text-gray-400">
               {formattedDate} / {formatTime(event.startTime)}
